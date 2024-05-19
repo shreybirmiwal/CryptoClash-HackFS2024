@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: 23d8801e8e239f54b9240c070a437ea2
+  productGUID: 503b19a96dd0d6c4d992e28d5c179d34
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -752,10 +752,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 6cab130c-3fa5-49ce-8e79-a3e6b0fee8f0
+  cloudProjectId: 6796d92b-9604-4f47-8a7b-862404b20f2a
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: hackfs2024
+  projectName: hackfs2024 2024-05-19_10-52-53
   organizationId: rambamamba
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
