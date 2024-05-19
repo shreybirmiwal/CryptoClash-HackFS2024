@@ -16,17 +16,13 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public TMP_InputField roomNameInput;
     public TMP_InputField roomBetAmountInput;
+    private string map = "Spiky Sallon";
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-
-        loadingMenu.SetActive(true);
-        mainMenu.SetActive(false);
-        createMenu.SetActive(false);
-
         Debug.Log("Connecting to Master");
         PhotonNetwork.ConnectUsingSettings();
     }
@@ -61,7 +57,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             return;
         }
-        PhotonNetwork.CreateRoom(null, new Photon.Realtime.RoomOptions { MaxPlayers = 4 });
+        PhotonNetwork.CreateRoom(roomNameInput.text, new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
 
         mainMenu.SetActive(false);
         loadingMenu.SetActive(true);
@@ -71,7 +67,17 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("Joined Room");
+        Debug.Log("Joined Room with " + PhotonNetwork.CurrentRoom.PlayerCount + " players" + "room name : " + PhotonNetwork.CurrentRoom.Name);
+    }
+
+
+    public void handleDropDownUpdateMapSelect(int val)
+    {
+        Debug.Log("Map Selected: " + val);
+        if (val == 0) map = "Spiky Sallon";
+        if (val == 1) map = "1";
+        if (val == 2) map = "2";
+
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
