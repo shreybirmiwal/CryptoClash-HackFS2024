@@ -38,7 +38,7 @@ public class InventorySelect : MonoBehaviour
         PopulateDropdown(skinDropdown, ownedSkins);
 
         UpdateSkinPreview();
-        updateWeaponPreview();
+        UpdateWeaponPreview();
     }
 
     void PopulateDropdown(TMP_Dropdown dropdown, List<string> items)

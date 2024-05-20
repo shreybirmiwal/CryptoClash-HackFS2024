@@ -127,6 +127,14 @@ public class Launcher : MonoBehaviourPunCallbacks
         inventoryMenu.SetActive(true);
     }
 
+    public void backToMainMenu()
+    {
+        mainMenu.SetActive(true);
+        loadingMenu.SetActive(false);
+        createMenu.SetActive(false);
+        inventoryMenu.SetActive(false);
+    }
+
     void Update()
     {
 
