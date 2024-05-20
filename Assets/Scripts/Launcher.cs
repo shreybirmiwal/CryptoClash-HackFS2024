@@ -13,6 +13,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public GameObject loadingMenu;
     public GameObject mainMenu;
     public GameObject createMenu;
+    public GameObject inventoryMenu;
 
 
     public TMP_InputField roomNameInput;
@@ -52,6 +53,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         loadingMenu.SetActive(false);
         mainMenu.SetActive(true);
         createMenu.SetActive(false);
+        inventoryMenu.SetActive(false);
     }
 
     public void ClickCreateRoom()
@@ -59,6 +61,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         mainMenu.SetActive(false);
         loadingMenu.SetActive(false);
         createMenu.SetActive(true);
+        inventoryMenu.SetActive(false);
     }
 
 
@@ -85,6 +88,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         mainMenu.SetActive(false);
         loadingMenu.SetActive(true);
         createMenu.SetActive(false);
+        inventoryMenu.SetActive(false);
     }
 
 
@@ -114,6 +118,13 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void QuitGame()
     {
         Application.Quit();
+    }
+    public void openInventory()
+    {
+        mainMenu.SetActive(false);
+        loadingMenu.SetActive(false);
+        createMenu.SetActive(false);
+        inventoryMenu.SetActive(true);
     }
 
     void Update()

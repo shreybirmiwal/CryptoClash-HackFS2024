@@ -371,6 +371,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5208190273412283769, guid: e7deecac6b0af084fa017cc7c15dab4c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7513609093283209291, guid: e7deecac6b0af084fa017cc7c15dab4c, type: 3}
       propertyPath: m_Name
       value: Skins_weapons First Person Controller

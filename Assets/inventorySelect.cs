@@ -1,27 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro; // For TextMeshPro dropdowns
+using UnityEngine.UI; // For RawImage components
 
 public class InventorySelect : MonoBehaviour
 {
-    public Dropdown weaponDropdown;
-    public Dropdown skinDropdown;
-    public Image weaponImagePreview;
-    public Image skinImagePreview;
+    public TMP_Dropdown weaponDropdown;
+    public TMP_Dropdown skinDropdown;
+    public RawImage weaponImagePreview;
+    public RawImage skinImagePreview;
 
     private List<string> ownedSkins;
     private List<string> ownedWeapons;
+
+
+
+
+    public List<Texture> skinsTexture;
+    public List<Texture> weaponsTexture;
 
     void Start()
     {
         weaponDropdown.onValueChanged.AddListener(delegate { UpdateWeaponPreview(); });
         skinDropdown.onValueChanged.AddListener(delegate { UpdateSkinPreview(); });
-    }
-
-    void Update()
-    {
-
     }
 
     void OnEnable()
@@ -34,10 +36,12 @@ public class InventorySelect : MonoBehaviour
         // Display the inventory
         PopulateDropdown(weaponDropdown, ownedWeapons);
         PopulateDropdown(skinDropdown, ownedSkins);
+
+        UpdateSkinPreview();
+        updateWeaponPreview();
     }
 
-    // Populate dropdown with items
-    void PopulateDropdown(Dropdown dropdown, List<string> items)
+    void PopulateDropdown(TMP_Dropdown dropdown, List<string> items)
     {
         dropdown.ClearOptions();
         dropdown.AddOptions(items);
@@ -45,39 +49,48 @@ public class InventorySelect : MonoBehaviour
         dropdown.RefreshShownValue();
     }
 
-    // Update the weapon image preview
     void UpdateWeaponPreview()
     {
         string selectedWeapon = weaponDropdown.options[weaponDropdown.value].text;
-        weaponImagePreview.sprite = GetSpriteForWeapon(selectedWeapon);
+        weaponImagePreview.texture = GetTextureForWeapon(selectedWeapon);
     }
 
-    // Update the skin image preview
     void UpdateSkinPreview()
     {
         string selectedSkin = skinDropdown.options[skinDropdown.value].text;
-        skinImagePreview.sprite = GetSpriteForSkin(selectedSkin);
+        skinImagePreview.texture = GetTextureForSkin(selectedSkin);
     }
 
-    // Function to get the user's owned skins
     List<string> getSkins()
     {
-        return new List<string> { "skin1", "skin2", "skin3" };
+
+        return new List<string> { "DefaultDon", "AngelicAmy", "ClowningCarl", "ChiefCop", "DistinguishedDevil" };
     }
 
-    // Function to get the user's owned weapons
     List<string> getWeapons()
     {
-        return new List<string> { "weapon1", "weapon2", "weapon3" };
+        return new List<string> { "EtherealEdge", "GnarlyGloves", "WatermellonWacker" };
+
     }
 
-    Sprite GetSpriteForWeapon(string weaponName)
+    Texture GetTextureForWeapon(string weaponName)
     {
-        return Resources.Load<Sprite>($"Weapons/{weaponName}");
+        if (weaponName == "EtherealEdge") return weaponsTexture[0];
+        if (weaponName == "GnarlyGloves") return weaponsTexture[1];
+        if (weaponName == "WatermellonWacker") return weaponsTexture[2];
+
+        return weaponsTexture[0];
     }
 
-    Sprite GetSpriteForSkin(string skinName)
+    Texture GetTextureForSkin(string skinName)
     {
-        return Resources.Load<Sprite>($"Skins/{skinName}");
+        if (skinName == "DefaultDon") return skinsTexture[0];
+        if (skinName == "AngelicAmy") return skinsTexture[1];
+        if (skinName == "ClowningCarl") return skinsTexture[2];
+        if (skinName == "ChiefCop") return skinsTexture[3];
+        if (skinName == "DistinguishedDevil") return skinsTexture[4];
+
+
+        return skinsTexture[0];
     }
 }
