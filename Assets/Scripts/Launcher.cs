@@ -111,9 +111,17 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.Log("Create Room Failed: " + message);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 
     void Update()
     {
 
     }
+
+
+
+
 }
