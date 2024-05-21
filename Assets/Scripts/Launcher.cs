@@ -36,6 +36,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject roomListItemPrefab;
     [SerializeField] Transform playerListContent;
     [SerializeField] GameObject playerListItemPrefab;
+    [SerializeField] GameObject startGameButton;
+
 
 
 
@@ -55,6 +57,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log("Connected to Master");
         PhotonNetwork.JoinLobby();
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public override void OnJoinedLobby()
@@ -64,7 +67,6 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
     }
-
 
 
     public async void CreateRoom()
@@ -95,11 +97,24 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     }
 
+    public void StartGame()
+    {
+        PhotonNetwork.LoadLevel(1);
+    }
+
     public override void OnJoinedRoom()
     {
+
+        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
+
         Debug.Log("Joined Room with " + PhotonNetwork.CurrentRoom.PlayerCount + " players" + "room name : " + PhotonNetwork.CurrentRoom.Name);
         gameRoomName_joinedMenu.text = PhotonNetwork.CurrentRoom.Name;
         ShowMenu(joinedMenu);
+
+        foreach (Transform child in playerListContent)
+        {
+            Destroy(child.gameObject);
+        }
 
 
         Player[] players = PhotonNetwork.PlayerList;
@@ -108,6 +123,11 @@ public class Launcher : MonoBehaviourPunCallbacks
             Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(player);
         }
 
+    }
+
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
     }
 
     public void handleDropDownUpdateMapSelect(int val)
@@ -132,6 +152,12 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         foreach (RoomInfo roomInfo in roomList)
         {
+
+            if (roomInfo.RemovedFromList)
+            {
+                continue;
+            }
+
             GameObject newRoomItem = Instantiate(roomListItemPrefab, roomListContent);
             newRoomItem.GetComponent<roomListitem>().SetRoomInfo(roomInfo);
         }

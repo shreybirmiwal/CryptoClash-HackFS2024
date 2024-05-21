@@ -8,7 +8,7 @@ public class roomListitem : MonoBehaviour
 {
 
     [SerializeField] TMP_Text text;
-    RoomInfo info;
+    public RoomInfo info;
 
 
     public void SetRoomInfo(RoomInfo _info)
