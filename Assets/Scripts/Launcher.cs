@@ -34,6 +34,9 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     [SerializeField] Transform roomListContent;
     [SerializeField] GameObject roomListItemPrefab;
+    [SerializeField] Transform playerListContent;
+    [SerializeField] GameObject playerListItemPrefab;
+
 
 
     private ThirdwebSDK sdk;
@@ -58,6 +61,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log("Joined Lobby");
         ShowMenu(mainMenu);
+
+        PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
     }
 
 
@@ -87,6 +92,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinRoom(info.Name);
         ShowMenu(loadingMenu);
+
     }
 
     public override void OnJoinedRoom()
@@ -94,6 +100,14 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.Log("Joined Room with " + PhotonNetwork.CurrentRoom.PlayerCount + " players" + "room name : " + PhotonNetwork.CurrentRoom.Name);
         gameRoomName_joinedMenu.text = PhotonNetwork.CurrentRoom.Name;
         ShowMenu(joinedMenu);
+
+
+        Player[] players = PhotonNetwork.PlayerList;
+        foreach (Player player in players)
+        {
+            Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(player);
+        }
+
     }
 
     public void handleDropDownUpdateMapSelect(int val)
@@ -121,6 +135,12 @@ public class Launcher : MonoBehaviourPunCallbacks
             GameObject newRoomItem = Instantiate(roomListItemPrefab, roomListContent);
             newRoomItem.GetComponent<roomListitem>().SetRoomInfo(roomInfo);
         }
+    }
+
+
+    public override void OnPlayerEnteredRoom(Player new_player)
+    {
+        Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(new_player);
     }
 
     private void ShowMenu(GameObject menuToShow)
