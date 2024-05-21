@@ -32,6 +32,7 @@ public class FirstPersonMovement : MonoBehaviour
         if (!PV.IsMine)
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
+            Destroy(rigidbody);
             return;
         }
     }

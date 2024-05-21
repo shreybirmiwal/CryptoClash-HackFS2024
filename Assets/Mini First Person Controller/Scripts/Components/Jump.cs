@@ -1,5 +1,8 @@
-﻿using UnityEngine;
-
+﻿using System.Collections.Generic;
+using UnityEngine;
+using Photon.Pun;
+using System.IO;
+using Photon.Realtime;
 public class Jump : MonoBehaviour
 {
     Rigidbody rigidbody;
@@ -8,10 +11,15 @@ public class Jump : MonoBehaviour
 
     [SerializeField, Tooltip("Prevents jumping when the transform is in mid-air.")]
     GroundCheck groundCheck;
+    PhotonView PV;
 
 
     void Reset()
     {
+        if (!PV.IsMine)
+        {
+            return;
+        }
         // Try to get groundCheck.
         groundCheck = GetComponentInChildren<GroundCheck>();
     }
@@ -20,10 +28,16 @@ public class Jump : MonoBehaviour
     {
         // Get rigidbody.
         rigidbody = GetComponent<Rigidbody>();
+        PV = GetComponent<PhotonView>();
+
     }
 
     void LateUpdate()
     {
+        if (!PV.IsMine)
+        {
+            return;
+        }
         // Jump when the Jump button is pressed and we are on the ground.
         if (Input.GetButtonDown("Jump") && (!groundCheck || groundCheck.isGrounded))
         {
