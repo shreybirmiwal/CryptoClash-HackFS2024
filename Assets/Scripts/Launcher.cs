@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using Thirdweb;
+using Photon.Realtime;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
@@ -13,7 +14,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public GameObject createMenu;
     public GameObject inventoryMenu;
     public GameObject joinedMenu;
-    public GameObject joinMenu;
+    public GameObject findGameMenu;
 
     public TMP_InputField roomNameInput;
     public TMP_InputField roomBetAmountInput;
@@ -21,6 +22,11 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public TMP_Text errorTextCreateRoom;
     public TMP_Text gameRoomName_joinedMenu;
+
+
+    [SerializeField] Transform roomListContent;
+    [SerializeField] GameObject roomListItemPrefab;
+
 
     private ThirdwebSDK sdk;
 
@@ -90,6 +96,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
 
 
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+
+    }
+
     private void ShowMenu(GameObject menuToShow)
     {
         loadingMenu.SetActive(menuToShow == loadingMenu);
@@ -97,8 +108,9 @@ public class Launcher : MonoBehaviourPunCallbacks
         createMenu.SetActive(menuToShow == createMenu);
         inventoryMenu.SetActive(menuToShow == inventoryMenu);
         joinedMenu.SetActive(menuToShow == joinedMenu);
-        joinMenu.SetActive(menuToShow == joinMenu);
+        findGameMenu.SetActive(menuToShow == findGameMenu);
     }
+
 
     void Update()
     {
@@ -135,9 +147,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         ShowMenu(mainMenu);
     }
-    public void ClickJoinRoom()
+    public void ClickFindGame()
     {
-        ShowMenu(joinMenu);
+        ShowMenu(findGameMenu);
     }
 
 
