@@ -8,6 +8,14 @@ using Photon.Realtime;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
+
+    public static Launcher Instance;
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
     //menus
     public GameObject loadingMenu;
     public GameObject mainMenu;
@@ -75,6 +83,12 @@ public class Launcher : MonoBehaviourPunCallbacks
         ShowMenu(loadingMenu);
     }
 
+    public void JoinRoom(RoomInfo info)
+    {
+        PhotonNetwork.JoinRoom(info.Name);
+        ShowMenu(loadingMenu);
+    }
+
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined Room with " + PhotonNetwork.CurrentRoom.PlayerCount + " players" + "room name : " + PhotonNetwork.CurrentRoom.Name);
@@ -98,7 +112,15 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-
+        foreach (Transform trans in roomListContent)
+        {
+            Destroy(trans.gameObject);
+        }
+        foreach (RoomInfo roomInfo in roomList)
+        {
+            GameObject newRoomItem = Instantiate(roomListItemPrefab, roomListContent);
+            newRoomItem.GetComponent<roomListitem>().SetRoomInfo(roomInfo);
+        }
     }
 
     private void ShowMenu(GameObject menuToShow)

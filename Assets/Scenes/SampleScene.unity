@@ -3152,7 +3152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &791501977
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3851,6 +3851,8 @@ MonoBehaviour:
   roomBetAmountInput: {fileID: 1469197502}
   errorTextCreateRoom: {fileID: 480918035}
   gameRoomName_joinedMenu: {fileID: 1229962608}
+  roomListContent: {fileID: 84751140}
+  roomListItemPrefab: {fileID: 3711302005169233310, guid: b55002d6768bc1543ba0c5044173e0cc, type: 3}
 --- !u!1 &943907660
 GameObject:
   m_ObjectHideFlags: 0
@@ -9570,7 +9572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2054689942
 RectTransform:
   m_ObjectHideFlags: 0
