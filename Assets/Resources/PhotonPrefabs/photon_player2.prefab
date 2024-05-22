@@ -11641,6 +11641,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5302424300420435134}
+  - component: {fileID: 3146678077683720635}
   m_Layer: 0
   m_Name: Weapons
   m_TagString: Untagged
@@ -11666,6 +11667,25 @@ Transform:
   - {fileID: 8672733121915816364}
   m_Father: {fileID: 5955687166983480888}
   m_LocalEulerAnglesHint: {x: -16.986, y: -5.749, z: -4.679}
+--- !u!114 &3146678077683720635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2999648813090580313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49adb1e7476264647bbbbcafab3c6f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxhealth: 100
+  curHealth: 100
+  healthBar: {fileID: 5080011438626618754}
+  photonView: {fileID: 8789816932248977739}
+  animator_boxing: {fileID: 7858398375041643910}
+  animator_watermellon: {fileID: 4173371508431054938}
+  animator_moonsword: {fileID: 453646279900168709}
 --- !u!1 &3000169368704670315
 GameObject:
   m_ObjectHideFlags: 0

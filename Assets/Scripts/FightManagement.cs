@@ -14,6 +14,12 @@ public class FightManagement : MonoBehaviour
     public PhotonView photonView;
 
 
+    public Animator animator_boxing;
+    public Animator animator_watermellon;
+    public Animator animator_moonsword;
+
+
+
     void refreshHealthBar()
     {
         float healthPct = curHealth / maxhealth;
@@ -53,6 +59,24 @@ public class FightManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+
+
         refreshHealthBar();
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Fired");
+
+            if (animator_boxing != null) animator_boxing.SetTrigger("hit");
+            if (animator_watermellon != null) animator_watermellon.SetTrigger("hit");
+            if (animator_moonsword != null) animator_moonsword.SetTrigger("hit");
+
+        }
+
     }
 }
