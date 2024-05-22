@@ -28062,6 +28062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1610f5956e1724ea14567e785a502d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 8789816932248977739}
   skins:
   - {fileID: 6793814755410615780}
   - {fileID: 5115004275654087791}
