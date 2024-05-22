@@ -86,7 +86,7 @@ public class InventorySelect : MonoBehaviour
 
     List<string> getWeapons()
     {
-        return new List<string> { "EtherealEdge", "GnarlyGloves", "WatermellonWacker" };
+        return new List<string> { "GnarlyGloves", "WatermellonWacker", "EtherealEdge" };
 
     }
 
@@ -119,11 +119,55 @@ public class InventorySelect : MonoBehaviour
         Debug.Log("Selected Skin: " + skinDropdown.options[skinDropdown.value].text);
 
 
-        PhotonNetwork.NickName = "|" + weaponDropdown.value.ToString() + "-" + skinDropdown.value.ToString() + "*" + usernameInput.text;
+        int skinRETURN = 0;
+        int weaponRETURN = 0;
+
+        string selectedWeapon = weaponDropdown.options[weaponDropdown.value].text;
+        if (selectedWeapon == "EtherealEdge")
+        {
+            weaponRETURN = 2;
+
+        }
+        else if (selectedWeapon == "GnarlyGloves")
+        {
+            weaponRETURN = 0;
+        }
+        else if (selectedWeapon == "WatermellonWacker")
+        {
+            weaponRETURN = 1;
+        }
+
+
+
+
+        string selectedSkin = skinDropdown.options[skinDropdown.value].text;
+        if (selectedSkin == "DefaultDon")
+        {
+            skinRETURN = 0;
+        }
+        else if (selectedSkin == "AngelicAmy")
+        {
+            skinRETURN = 1;
+        }
+        else if (selectedSkin == "ClowningCarl")
+        {
+            skinRETURN = 2;
+        }
+        else if (selectedSkin == "ChiefCop")
+        {
+            skinRETURN = 3;
+        }
+        else if (selectedSkin == "DistinguishedDevil")
+        {
+            skinRETURN = 4;
+        }
+
+
+
+
+        PhotonNetwork.NickName = weaponRETURN.ToString() + "-" + skinRETURN.ToString() + "*" + usernameInput.text;
 
         Debug.Log("PhotonNetwork.NickName: " + PhotonNetwork.NickName);
-
-
 
     }
 }

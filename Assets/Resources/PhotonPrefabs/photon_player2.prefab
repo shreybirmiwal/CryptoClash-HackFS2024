@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3751250174552392795}
   m_Layer: 0
-  m_Name: 13Robber
+  m_Name: 12Robber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2400,7 +2400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8800191780430665246}
   m_Layer: 0
-  m_Name: 16Zombie
+  m_Name: 15Zombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9897,7 +9897,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3377661175753468010}
   m_Layer: 0
-  m_Name: 8Santa
+  m_Name: 7Santa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11497,7 +11497,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5345238678955896536}
   m_Layer: 0
-  m_Name: 14Villager
+  m_Name: 13Villager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11678,7 +11678,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8244472612178771734}
   m_Layer: 0
-  m_Name: 10Nurse
+  m_Name: 9Nurse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13898,7 +13898,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8693552654813297886}
   m_Layer: 0
-  m_Name: 12Pilgrim
+  m_Name: 11Pilgrim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20679,7 +20679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1892637868778889434}
   m_Layer: 0
-  m_Name: 15Witch
+  m_Name: 14Witch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20727,7 +20727,7 @@ Transform:
   m_GameObject: {fileID: 5614690155352497488}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.602, z: 0}
+  m_LocalPosition: {x: 0, y: 1.602, z: 0.214}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26381,7 +26381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6724431031010294486}
   m_Layer: 0
-  m_Name: 9Knight
+  m_Name: 8Knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27904,6 +27904,7 @@ GameObject:
   - component: {fileID: 711225613414543550}
   - component: {fileID: 8789816932248977739}
   - component: {fileID: 6107725293805529417}
+  - component: {fileID: 2702773581291806542}
   m_Layer: 0
   m_Name: photon_player2
   m_TagString: Untagged
@@ -28049,6 +28050,39 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &2702773581291806542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7513609093283209291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b1610f5956e1724ea14567e785a502d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skins:
+  - {fileID: 6793814755410615780}
+  - {fileID: 5115004275654087791}
+  - {fileID: 3000763641063375670}
+  - {fileID: 8397993243332228239}
+  - {fileID: 8108143169678754676}
+  - {fileID: 8674544707857961589}
+  - {fileID: 8237591956947064005}
+  - {fileID: 2434164790327791492}
+  - {fileID: 7167529814509980432}
+  - {fileID: 3051704578757706895}
+  - {fileID: 9160484958554873101}
+  - {fileID: 3644623400673089320}
+  - {fileID: 11538629785168683}
+  - {fileID: 2992106033977627857}
+  - {fileID: 5586883480066865513}
+  - {fileID: 677414157126531385}
+  weapons:
+  - {fileID: 7268365801941703298}
+  - {fileID: 4909353783929896280}
+  - {fileID: 8668641446865303054}
 --- !u!1 &7568791440616384716
 GameObject:
   m_ObjectHideFlags: 0
@@ -31158,7 +31192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 84163507929773358}
   m_Layer: 0
-  m_Name: 5Devil
+  m_Name: 4Devil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31614,7 +31648,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2581519157823417859}
   m_Layer: 0
-  m_Name: 7Ghost
+  m_Name: 6Ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33316,7 +33350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1413454679103453372}
   m_Layer: 0
-  m_Name: 6Doctor
+  m_Name: 5Doctor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35171,7 +35205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5216637328719460314}
   m_Layer: 0
-  m_Name: 11Patient
+  m_Name: 10Patient
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

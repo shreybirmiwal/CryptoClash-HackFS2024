@@ -13,7 +13,20 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
     public void SetUp(Player _player)
     {
         player = _player;
-        text.text = _player.NickName;
+
+        var nick = _player.NickName;
+
+        if (nick.Contains("*"))
+        {
+            string username = nick.Substring(nick.IndexOf("*") + 1);
+            text.text = username;
+        }
+        else
+        {
+            text.text = _player.NickName;
+        }
+
+
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
