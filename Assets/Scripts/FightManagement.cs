@@ -4,8 +4,9 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-public class FightManagement : MonoBehaviour
+public class FightManagement : MonoBehaviourPunCallbacks
 {
     public float maxhealth = 100f;
     public float curHealth;
@@ -33,7 +34,7 @@ public class FightManagement : MonoBehaviour
 
     void refreshHealthBar()
     {
-        Debug.Log("Refreshing Health Bar CALLED ,  CUR HEALTH IS: " + curHealth + " MAX HEALTH IS: " + maxhealth);
+        Debug.Log("Refreshing Health Bar CALLED, CUR HEALTH IS: " + curHealth + " MAX HEALTH IS: " + maxhealth);
         float healthPct = curHealth / maxhealth;
         healthBar.localScale = Vector3.Lerp(healthBar.localScale, new Vector3(healthPct, 1, 1), Time.deltaTime * 8f);
     }
@@ -43,41 +44,31 @@ public class FightManagement : MonoBehaviour
     {
         Debug.Log("RPC_TakeDamage called by " + info.Sender);
 
-        if (!photonView.IsMine)
+        if (photonView.IsMine)
         {
-            return;
-        }
-
-        curHealth -= damage;
-        if (curHealth <= 0)
-        {
-            curHealth = 0;
-            Debug.Log("Player is dead.");
-
-            looseUI.SetActive(true);
-
-            // Inform the opponent that they have won
-            PhotonView opponentPhotonView = PhotonView.Find(info.Sender.ActorNumber);
-            if (opponentPhotonView != null && opponentPhotonView.Owner != null)
+            curHealth -= damage;
+            if (curHealth <= 0)
             {
-                opponentPhotonView.RPC("RPC_DisplayWinUI", opponentPhotonView.Owner);
+                curHealth = 0;
+                Debug.Log("Player is dead.");
+
+                looseUI.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+
+                Hashtable hash = new Hashtable();
+                hash.Add("GameEnded", true);
+                PhotonNetwork.CurrentRoom.SetCustomProperties(hash);
             }
+
+            Debug.Log("Damage taken: " + damage + ", Current Health: " + curHealth);
+
+            refreshHealthBar();
         }
-
-        Debug.Log("Damage taken: " + damage + ", Current Health: " + curHealth);
-
-        refreshHealthBar();
     }
 
-    [PunRPC]
-    void RPC_DisplayWinUI()
+    public void returnToLobby()
     {
-        if (!photonView.IsMine)
-        {
-            return;
-        }
-
-        winUI.SetActive(true);
+        PhotonNetwork.LeaveRoom();
     }
 
     void Update()
@@ -88,7 +79,6 @@ public class FightManagement : MonoBehaviour
         }
 
         refreshHealthBar();
-
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -119,6 +109,23 @@ public class FightManagement : MonoBehaviour
             else
             {
                 Debug.Log("Raycast did not hit anything");
+            }
+        }
+    }
+
+    public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
+    {
+        if (propertiesThatChanged.ContainsKey("GameEnded") && (bool)propertiesThatChanged["GameEnded"])
+        {
+            if (!looseUI.activeSelf) // Ensure the looseUI is not active to show winUI
+            {
+
+                if (winUI != null)
+                {
+                    winUI.SetActive(true);
+                    Cursor.lockState = CursorLockMode.None;
+
+                }
             }
         }
     }
