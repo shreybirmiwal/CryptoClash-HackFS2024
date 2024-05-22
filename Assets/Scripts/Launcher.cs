@@ -25,11 +25,15 @@ public class Launcher : MonoBehaviourPunCallbacks
     public GameObject findGameMenu;
 
     public TMP_InputField roomNameInput;
+    public TMP_Dropdown mapDropdown;
     public TMP_InputField roomBetAmountInput;
-    private string map = "Spiky Sallon";
 
     public TMP_Text errorTextCreateRoom;
     public TMP_Text gameRoomName_joinedMenu;
+
+
+
+    private int mapNum = 1;
 
 
     [SerializeField] Transform roomListContent;
@@ -42,6 +46,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 
     private ThirdwebSDK sdk;
+
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +89,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             errorTextCreateRoom.text = "Please connect your wallet";
             return;
         }
+        mapNum = mapDropdown.value + 1;
 
         PhotonNetwork.CreateRoom(roomNameInput.text, new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
 
@@ -99,7 +105,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-        PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.LoadLevel(mapNum);
     }
 
     public override void OnJoinedRoom()
@@ -130,13 +136,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         startGameButton.SetActive(PhotonNetwork.IsMasterClient);
     }
 
-    public void handleDropDownUpdateMapSelect(int val)
-    {
-        Debug.Log("Map Selected: " + val);
-        if (val == 0) map = "Spiky Sallon";
-        if (val == 1) map = "1";
-        if (val == 2) map = "2";
-    }
+
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {

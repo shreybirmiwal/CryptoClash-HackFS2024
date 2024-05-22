@@ -3815,7 +3815,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Spiky Sallon
+  m_text: Default
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4239,6 +4239,7 @@ MonoBehaviour:
   joinedMenu: {fileID: 2032541440}
   findGameMenu: {fileID: 791501976}
   roomNameInput: {fileID: 610632166}
+  mapDropdown: {fileID: 1992034295}
   roomBetAmountInput: {fileID: 1469197502}
   errorTextCreateRoom: {fileID: 480918035}
   gameRoomName_joinedMenu: {fileID: 1229962608}
@@ -10100,11 +10101,17 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Spiky Sallon
+    - m_Text: Default
       m_Image: {fileID: 0}
-    - m_Text: Bashy Bathroom
+    - m_Text: TempleTussle
       m_Image: {fileID: 0}
-    - m_Text: Harsh Home
+    - m_Text: BazaarBash
+      m_Image: {fileID: 0}
+    - m_Text: ShipScuttle
+      m_Image: {fileID: 0}
+    - m_Text: CemeteryClash
+      m_Image: {fileID: 0}
+    - m_Text: SpaceSkirmish
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

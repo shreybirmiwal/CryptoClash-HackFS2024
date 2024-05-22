@@ -68,7 +68,7 @@ public class FightManagement : MonoBehaviourPunCallbacks
 
     public void returnToLobby()
     {
-        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LoadLevel(0);
     }
 
     void Update()
@@ -89,9 +89,9 @@ public class FightManagement : MonoBehaviourPunCallbacks
             if (animator_moonsword != null) animator_moonsword.SetTrigger("hit");
 
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-            ray.origin = cam.transform.position - ray.direction * 0.1f;
+            ray.origin = cam.transform.position - ray.direction * 0.2f;
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+            if (Physics.Raycast(ray, out RaycastHit hit, 4f))
             {
                 Debug.Log("Raycast hit: " + hit.collider.name);
 

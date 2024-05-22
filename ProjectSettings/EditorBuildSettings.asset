@@ -9,6 +9,24 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
+    path: Assets/Scenes/1_default.unity
+    guid: cf635ab5659fab045acb7850dd0d2af1
+  - enabled: 1
+    path: Assets/Scenes/2_TempleTussle.unity
+    guid: 7c427ec8f79f4f44281a44d82b7a8729
+  - enabled: 1
+    path: Assets/Scenes/3_BazaarBash.unity
+    guid: ce541030291742347b5abd3ad6ff60a6
+  - enabled: 1
+    path: Assets/Scenes/4_ShipScuttle.unity
+    guid: 48cb40fe8bfcf3a4ab7b0a7553b94c1e
+  - enabled: 1
+    path: Assets/Scenes/5_CemeteryClash.unity
+    guid: 211672f799b6ccc4da5c495525f65046
+  - enabled: 1
+    path: Assets/Scenes/6_SpaceSkirmish.unity
+    guid: 1d75524853f57774183318239cf047fa
+  - enabled: 0
     path: Assets/Scenes/Game.unity
     guid: 250c73ad2a78a6c4cab9225d12a2927d
   m_configObjects: {}
