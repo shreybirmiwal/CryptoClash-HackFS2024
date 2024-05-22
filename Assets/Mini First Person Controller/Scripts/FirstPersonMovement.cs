@@ -32,58 +32,13 @@ public class FirstPersonMovement : MonoBehaviour
         if (!PV.IsMine)
         {
             Camera cameraComponent = GetComponentInChildren<Camera>();
-            if (cameraComponent != null)
-            {
-                // Delete the Camera component
-                Destroy(cameraComponent);
+            Destroy(cameraComponent.gameObject);
 
-                // Delete the AudioListener component if it exists
-                AudioListener audioListener = cameraComponent.GetComponent<AudioListener>();
-                if (audioListener != null)
-                {
-                    Destroy(audioListener);
-                }
+            Destroy(GetComponentInChildren<FirstPersonLook>());
+            Destroy(rigidbody);
 
-                // Delete the FirstPersonLook script if it exists
-                FirstPersonLook firstPersonLook = cameraComponent.GetComponent<FirstPersonLook>();
-                if (firstPersonLook != null)
-                {
-                    Destroy(firstPersonLook);
-                }
-
-                // Delete the PostProcessingBehavior component if it exists
-                PostProcessingBehavior postProcessing = cameraComponent.GetComponent<PostProcessingBehavior>();
-                if (postProcessing != null)
-                {
-                    Destroy(postProcessing);
-                }
-
-                // Delete the CullDistances component if it exists
-                CullDistances cullDistances = cameraComponent.GetComponent<CullDistances>();
-                if (cullDistances != null)
-                {
-                    Destroy(cullDistances);
-                }
-
-                // Delete the FlareLayer component if it exists
-                FlareLayer flareLayer = cameraComponent.GetComponent<FlareLayer>();
-                if (flareLayer != null)
-                {
-                    Destroy(flareLayer);
-                }
-            }
-
-            // Assuming you also want to destroy the Rigidbody component from the GameObject this script is attached to
-            Rigidbody rigidbodyComponent = GetComponent<Rigidbody>();
-            if (rigidbodyComponent != null)
-            {
-                Destroy(rigidbodyComponent);
-            }
-
-            return;
         }
     }
-
     void FixedUpdate()
     {
 
