@@ -14,6 +14,9 @@ public class FightManagement : MonoBehaviour
     public PhotonView photonView;
 
 
+    public BoxCollider attackZone;
+
+
     public Animator animator_boxing;
     public Animator animator_watermellon;
     public Animator animator_moonsword;
@@ -64,9 +67,7 @@ public class FightManagement : MonoBehaviour
             return;
         }
 
-
         refreshHealthBar();
-
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -76,7 +77,24 @@ public class FightManagement : MonoBehaviour
             if (animator_watermellon != null) animator_watermellon.SetTrigger("hit");
             if (animator_moonsword != null) animator_moonsword.SetTrigger("hit");
 
+            CheckHit();
         }
+    }
 
+    void CheckHit()
+    {
+        Collider[] hitColliders = Physics.OverlapBox(attackZone.center, attackZone.size / 2, attackZone.transform.rotation);
+
+        foreach (Collider collider in hitColliders)
+        {
+            Debug.Log(collider.name);
+            if (collider.CompareTag("hitbox"))
+            {
+                Debug.Log("Hitbox hit!");
+                // Handle hit logic here, e.g., applying damage
+                photonView.RPC("RPC_TakeDamage", RpcTarget.All, 10.0f); // example damage value
+            }
+        }
     }
 }
+
