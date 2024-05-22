@@ -11641,7 +11641,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5302424300420435134}
-  - component: {fileID: 3146678077683720635}
   m_Layer: 0
   m_Name: Weapons
   m_TagString: Untagged
@@ -11665,29 +11664,8 @@ Transform:
   - {fileID: 2076415101080307664}
   - {fileID: 8249150418346217291}
   - {fileID: 8672733121915816364}
-  - {fileID: 4606577056022915759}
   m_Father: {fileID: 5955687166983480888}
   m_LocalEulerAnglesHint: {x: -16.986, y: -5.749, z: -4.679}
---- !u!114 &3146678077683720635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2999648813090580313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49adb1e7476264647bbbbcafab3c6f95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxhealth: 100
-  curHealth: 100
-  healthBar: {fileID: 5080011438626618754}
-  photonView: {fileID: 8789816932248977739}
-  attackZone: {fileID: 789072101814758490}
-  animator_boxing: {fileID: 7858398375041643910}
-  animator_watermellon: {fileID: 4173371508431054938}
-  animator_moonsword: {fileID: 453646279900168709}
 --- !u!1 &3000169368704670315
 GameObject:
   m_ObjectHideFlags: 0
@@ -17998,59 +17976,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &4714490372885012288
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4606577056022915759}
-  - component: {fileID: 789072101814758490}
-  m_Layer: 0
-  m_Name: AttackZone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4606577056022915759
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4714490372885012288}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0.472}
-  m_LocalScale: {x: 1.5303, y: 1.5303, z: 1.0316976}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5302424300420435134}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &789072101814758490
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4714490372885012288}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4714819256909418623
 GameObject:
   m_ObjectHideFlags: 0
@@ -18642,59 +18567,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &4841776319037248054
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8790228815338613002}
-  - component: {fileID: 713941235186953834}
-  m_Layer: 0
-  m_Name: Hitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8790228815338613002
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4841776319037248054}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.018, z: 0}
-  m_LocalScale: {x: 1, y: 1.8348882, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4825887964136756623}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &713941235186953834
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4841776319037248054}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4862600975461210487
 GameObject:
   m_ObjectHideFlags: 0
@@ -28657,6 +28529,7 @@ GameObject:
   - component: {fileID: 8789816932248977739}
   - component: {fileID: 6107725293805529417}
   - component: {fileID: 2702773581291806542}
+  - component: {fileID: 7057285301564315472}
   m_Layer: 0
   m_Name: photon_player2
   m_TagString: Untagged
@@ -28677,7 +28550,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8790228815338613002}
   - {fileID: 5352804039219318110}
   - {fileID: 5955687166983480888}
   - {fileID: 6856380624294337139}
@@ -28750,6 +28622,7 @@ MonoBehaviour:
   canRun: 1
   runSpeed: 9
   runningKey: 304
+  UI: {fileID: 1960538932274841106}
 --- !u!114 &711225613414543550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28840,6 +28713,26 @@ MonoBehaviour:
   - {fileID: 7268365801941703298}
   - {fileID: 4909353783929896280}
   - {fileID: 8668641446865303054}
+--- !u!114 &7057285301564315472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7513609093283209291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49adb1e7476264647bbbbcafab3c6f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxhealth: 100
+  curHealth: 100
+  healthBar: {fileID: 5080011438626618754}
+  photonView: {fileID: 8789816932248977739}
+  cam: {fileID: 5195960252413163486}
+  animator_boxing: {fileID: 7858398375041643910}
+  animator_watermellon: {fileID: 4173371508431054938}
+  animator_moonsword: {fileID: 453646279900168709}
 --- !u!1 &7520996911841900225
 GameObject:
   m_ObjectHideFlags: 0

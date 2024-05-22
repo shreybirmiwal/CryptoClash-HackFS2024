@@ -13,6 +13,8 @@ public class FirstPersonMovement : MonoBehaviour
     public float runSpeed = 9;
     public KeyCode runningKey = KeyCode.LeftShift;
 
+    public GameObject UI;
+
     Rigidbody rigidbody;
     PhotonView PV;
     /// <summary> Functions to override movement speed. Will use the last added override. </summary>
@@ -36,7 +38,7 @@ public class FirstPersonMovement : MonoBehaviour
 
             Destroy(GetComponentInChildren<FirstPersonLook>());
             Destroy(rigidbody);
-
+            Destroy(UI);
         }
     }
     void FixedUpdate()

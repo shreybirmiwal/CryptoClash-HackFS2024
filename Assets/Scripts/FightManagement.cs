@@ -5,48 +5,42 @@ using Photon.Pun;
 using TMPro;
 using Thirdweb;
 using Photon.Realtime;
+
 public class FightManagement : MonoBehaviour
 {
-
-    public float maxhealth;
+    public float maxhealth = 100f;
     public float curHealth;
     public Transform healthBar;
     public PhotonView photonView;
 
-
-    public BoxCollider attackZone;
-
+    [SerializeField] Camera cam;
 
     public Animator animator_boxing;
     public Animator animator_watermellon;
     public Animator animator_moonsword;
 
-
+    void Start()
+    {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+        curHealth = maxhealth;
+        refreshHealthBar();
+    }
 
     void refreshHealthBar()
     {
+        Debug.Log("Refreshing Health Bar CALLED ,  CUR HEALTH IS: " + curHealth + " MAX HEALTH IS: " + maxhealth);
         float healthPct = curHealth / maxhealth;
         healthBar.localScale = Vector3.Lerp(healthBar.localScale, new Vector3(healthPct, 1, 1), Time.deltaTime * 8f);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-
-
-    public void TakeDamage(float damage)
-    {
-
-        photonView.RPC("RPC_TakeDamage", RpcTarget.All, damage);
-
-    }
-
     [PunRPC]
-    void RPC_TakeDamage(float damage)
+    void RPC_TakeDamage(float damage, PhotonMessageInfo info)
     {
+        Debug.Log("RPC_TakeDamage called by " + info.Sender);
+
         if (!photonView.IsMine)
         {
             return;
@@ -56,10 +50,16 @@ public class FightManagement : MonoBehaviour
         if (curHealth <= 0)
         {
             curHealth = 0;
+            Debug.Log("Player is dead.");
+            // Handle player death here, e.g., respawning
         }
+
+        Debug.Log("Damage taken: " + damage + ", Current Health: " + curHealth);
+
+        // Update the health bar immediately after taking damage
+        refreshHealthBar();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!photonView.IsMine)
@@ -77,24 +77,28 @@ public class FightManagement : MonoBehaviour
             if (animator_watermellon != null) animator_watermellon.SetTrigger("hit");
             if (animator_moonsword != null) animator_moonsword.SetTrigger("hit");
 
-            CheckHit();
-        }
-    }
+            Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            ray.origin = cam.transform.position - ray.direction * 0.1f;
 
-    void CheckHit()
-    {
-        Collider[] hitColliders = Physics.OverlapBox(attackZone.center, attackZone.size / 2, attackZone.transform.rotation);
-
-        foreach (Collider collider in hitColliders)
-        {
-            Debug.Log(collider.name);
-            if (collider.CompareTag("hitbox"))
+            if (Physics.Raycast(ray, out RaycastHit hit, 3f))
             {
-                Debug.Log("Hitbox hit!");
-                // Handle hit logic here, e.g., applying damage
-                photonView.RPC("RPC_TakeDamage", RpcTarget.All, 10.0f); // example damage value
+                Debug.Log("Raycast hit: " + hit.collider.name);
+
+                PhotonView targetPhotonView = hit.collider.GetComponent<PhotonView>();
+                if (targetPhotonView != null && !targetPhotonView.IsMine)
+                {
+                    Debug.Log("Calling TakeDamage on target");
+                    targetPhotonView.RPC("RPC_TakeDamage", RpcTarget.All, 10f); // example damage value
+                }
+                else
+                {
+                    Debug.Log("Hit object does not have a PhotonView or is the current player");
+                }
+            }
+            else
+            {
+                Debug.Log("Raycast did not hit anything");
             }
         }
     }
 }
-
