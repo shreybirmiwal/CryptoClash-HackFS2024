@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
-using Thirdweb;
 using Photon.Realtime;
 
 public class FightManagement : MonoBehaviour
@@ -18,6 +17,9 @@ public class FightManagement : MonoBehaviour
     public Animator animator_boxing;
     public Animator animator_watermellon;
     public Animator animator_moonsword;
+
+    public GameObject looseUI;
+    public GameObject winUI;
 
     void Start()
     {
@@ -51,13 +53,31 @@ public class FightManagement : MonoBehaviour
         {
             curHealth = 0;
             Debug.Log("Player is dead.");
-            // Handle player death here, e.g., respawning
+
+            looseUI.SetActive(true);
+
+            // Inform the opponent that they have won
+            PhotonView opponentPhotonView = PhotonView.Find(info.Sender.ActorNumber);
+            if (opponentPhotonView != null && opponentPhotonView.Owner != null)
+            {
+                opponentPhotonView.RPC("RPC_DisplayWinUI", opponentPhotonView.Owner);
+            }
         }
 
         Debug.Log("Damage taken: " + damage + ", Current Health: " + curHealth);
 
-        // Update the health bar immediately after taking damage
         refreshHealthBar();
+    }
+
+    [PunRPC]
+    void RPC_DisplayWinUI()
+    {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+
+        winUI.SetActive(true);
     }
 
     void Update()
@@ -68,6 +88,7 @@ public class FightManagement : MonoBehaviour
         }
 
         refreshHealthBar();
+
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -88,7 +109,7 @@ public class FightManagement : MonoBehaviour
                 if (targetPhotonView != null && !targetPhotonView.IsMine)
                 {
                     Debug.Log("Calling TakeDamage on target");
-                    targetPhotonView.RPC("RPC_TakeDamage", RpcTarget.All, 10f); // example damage value
+                    targetPhotonView.RPC("RPC_TakeDamage", RpcTarget.All, 20f);
                 }
                 else
                 {
