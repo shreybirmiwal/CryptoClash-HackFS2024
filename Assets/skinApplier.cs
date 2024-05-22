@@ -6,8 +6,9 @@ using TMPro;
 using Thirdweb;
 using Photon.Realtime;
 using System.Text.RegularExpressions;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-public class skinApplier : MonoBehaviour
+public class skinApplier : MonoBehaviourPunCallbacks
 {
 
     public PhotonView photonView;
@@ -16,6 +17,21 @@ public class skinApplier : MonoBehaviour
     public List<GameObject> weapons;
 
 
+
+    void setGunWeaponIndex(int skinIndex, int weaponIndex)
+    {
+        foreach (var skin in skins)
+        {
+            skin.SetActive(false);
+        }
+        skins[skinIndex].SetActive(true);
+
+        foreach (var weapon in weapons)
+        {
+            weapon.SetActive(false);
+        }
+        weapons[weaponIndex].SetActive(true);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -29,50 +45,48 @@ public class skinApplier : MonoBehaviour
         {
 
             string nick = PhotonNetwork.NickName;
+            int weaponIndex = 0;
+            int skinIndex = 0;
+            string username = "";
+
             if (nick.Contains("*"))
             {
-                // Code to handle the case when nick contains *
                 string pattern = @"\d+";
                 MatchCollection matches = Regex.Matches(nick, pattern);
-
-
-                string firstNumber = matches[0].Value;
-                string secondNumber = matches[1].Value;
-
-                string username = nick.Substring(nick.IndexOf("*") + 1);
-
-                int weaponIndex = int.Parse(firstNumber);
-                int skinIndex = int.Parse(secondNumber);
-
-                foreach (var skin in skins)
-                {
-                    skin.SetActive(false);
-                }
-                skins[skinIndex].SetActive(true);
-
-                foreach (var weapon in weapons)
-                {
-                    weapon.SetActive(false);
-                }
-                weapons[weaponIndex].SetActive(true);
-
+                weaponIndex = int.Parse(matches[0].Value);
+                skinIndex = int.Parse(matches[1].Value);
+                username = nick.Substring(nick.IndexOf("*") + 1);
             }
-            else
+
+            Hashtable hash = new Hashtable();
+            hash.Add("skinIndex", skinIndex);
+            hash.Add("weaponIndex", weaponIndex);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+
+            setGunWeaponIndex(skinIndex, weaponIndex);
+
+        }
+    }
+
+
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+    {
+        if (!photonView.IsMine && targetPlayer == photonView.Owner)
+        {
+            int skinIndex = 0;
+            int weaponIndex = 0;
+
+            if (changedProps.ContainsKey("skinIndex"))
             {
-                // Use defaults
-                foreach (var skin in skins)
-                {
-                    skin.SetActive(false);
-                }
-                skins[0].SetActive(true);
-
-                foreach (var weapon in weapons)
-                {
-                    weapon.SetActive(false);
-                }
-                weapons[0].SetActive(true);
-
+                skinIndex = (int)changedProps["skinIndex"];
             }
+
+            if (changedProps.ContainsKey("weaponIndex"))
+            {
+                weaponIndex = (int)changedProps["weaponIndex"];
+            }
+
+            setGunWeaponIndex(skinIndex, weaponIndex);
         }
     }
 
