@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro; // For TextMeshPro dropdowns
 using UnityEngine.UI; // For RawImage components
+using Photon.Pun;
+using Photon.Realtime;
 
 public class InventorySelect : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class InventorySelect : MonoBehaviour
     private List<string> ownedWeapons;
 
 
+    public TMP_InputField usernameInput;
+
 
 
     public List<Texture> skinsTexture;
@@ -24,6 +28,19 @@ public class InventorySelect : MonoBehaviour
     {
         weaponDropdown.onValueChanged.AddListener(delegate { UpdateWeaponPreview(); });
         skinDropdown.onValueChanged.AddListener(delegate { UpdateSkinPreview(); });
+
+
+        if (PhotonNetwork.NickName != "" || PhotonNetwork.NickName != null)
+        {
+
+            int asteriskIndex = PhotonNetwork.NickName.IndexOf('*');
+            usernameInput.text = PhotonNetwork.NickName.Substring(asteriskIndex + 1);
+
+        }
+        else
+        {
+            usernameInput.text = "Player " + Random.Range(0, 1000).ToString("0000");
+        }
     }
 
     void OnEnable()
@@ -92,5 +109,21 @@ public class InventorySelect : MonoBehaviour
 
 
         return skinsTexture[0];
+    }
+
+
+    public void onSubmitInventory()
+    {
+        Debug.Log("Username: " + usernameInput.text);
+        Debug.Log("Selected Weapon: " + weaponDropdown.options[weaponDropdown.value].text);
+        Debug.Log("Selected Skin: " + skinDropdown.options[skinDropdown.value].text);
+
+
+        PhotonNetwork.NickName = "|" + weaponDropdown.value.ToString() + "-" + skinDropdown.value.ToString() + "*" + usernameInput.text;
+
+        Debug.Log("PhotonNetwork.NickName: " + PhotonNetwork.NickName);
+
+
+
     }
 }
