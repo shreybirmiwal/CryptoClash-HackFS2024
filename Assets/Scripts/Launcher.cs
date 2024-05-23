@@ -26,7 +26,6 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public TMP_InputField roomNameInput;
     public TMP_Dropdown mapDropdown;
-    public TMP_InputField roomBetAmountInput;
 
     public TMP_Text errorTextCreateRoom;
     public TMP_Text gameRoomName_joinedMenu;
@@ -76,9 +75,9 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public async void CreateRoom()
     {
-        if (string.IsNullOrEmpty(roomNameInput.text) || string.IsNullOrEmpty(roomBetAmountInput.text))
+        if (string.IsNullOrEmpty(roomNameInput.text))
         {
-            errorTextCreateRoom.text = "Room Name and Bet Amount cannot be empty";
+            errorTextCreateRoom.text = "Room Name cannot be empty";
             return;
         }
 

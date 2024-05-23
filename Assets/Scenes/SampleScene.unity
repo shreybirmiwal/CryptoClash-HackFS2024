@@ -3413,11 +3413,11 @@ RectTransform:
   m_Children:
   - {fileID: 1597767827}
   - {fileID: 474486403}
-  - {fileID: 1268219596}
   - {fileID: 895201282}
   - {fileID: 1094216146}
   - {fileID: 84751140}
   - {fileID: 1956859159}
+  - {fileID: 1268219596}
   m_Father: {fileID: 921439145}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4096,7 +4096,6 @@ MonoBehaviour:
   findGameMenu: {fileID: 791501976}
   roomNameInput: {fileID: 610632166}
   mapDropdown: {fileID: 1992034295}
-  roomBetAmountInput: {fileID: 0}
   errorTextCreateRoom: {fileID: 480918035}
   gameRoomName_joinedMenu: {fileID: 1229962608}
   roomListContent: {fileID: 84751140}
@@ -5524,9 +5523,9 @@ RectTransform:
   - {fileID: 1992034294}
   - {fileID: 1840794294}
   - {fileID: 480918034}
-  - {fileID: 1975006268}
   - {fileID: 1074364795}
   - {fileID: 1452564963}
+  - {fileID: 1975006268}
   m_Father: {fileID: 921439145}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -10229,10 +10228,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 747765607}
-  - {fileID: 1435472274}
   - {fileID: 1229962607}
   - {fileID: 1228839190}
   - {fileID: 782628379}
+  - {fileID: 1435472274}
   m_Father: {fileID: 921439145}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
