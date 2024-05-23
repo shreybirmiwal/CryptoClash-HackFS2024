@@ -18,6 +18,7 @@ public class FightManagement : MonoBehaviourPunCallbacks
     public Animator animator_boxing;
     public Animator animator_watermellon;
     public Animator animator_moonsword;
+    public Animator animator_plunger;
 
     public GameObject looseUI;
     public GameObject winUI;
@@ -34,7 +35,7 @@ public class FightManagement : MonoBehaviourPunCallbacks
 
     void refreshHealthBar()
     {
-        Debug.Log("Refreshing Health Bar CALLED, CUR HEALTH IS: " + curHealth + " MAX HEALTH IS: " + maxhealth);
+        // Debug.Log("Refreshing Health Bar CALLED, CUR HEALTH IS: " + curHealth + " MAX HEALTH IS: " + maxhealth);
         float healthPct = curHealth / maxhealth;
         healthBar.localScale = Vector3.Lerp(healthBar.localScale, new Vector3(healthPct, 1, 1), Time.deltaTime * 8f);
     }
@@ -87,6 +88,7 @@ public class FightManagement : MonoBehaviourPunCallbacks
             if (animator_boxing != null) animator_boxing.SetTrigger("hit");
             if (animator_watermellon != null) animator_watermellon.SetTrigger("hit");
             if (animator_moonsword != null) animator_moonsword.SetTrigger("hit");
+            if (animator_plunger != null) animator_plunger.SetTrigger("hit");
 
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             ray.origin = cam.transform.position - ray.direction * 0.2f;
