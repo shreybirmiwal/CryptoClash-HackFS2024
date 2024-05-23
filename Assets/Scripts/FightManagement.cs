@@ -14,6 +14,8 @@ public class FightManagement : MonoBehaviourPunCallbacks
     public PhotonView photonView;
 
     [SerializeField] Camera cam;
+    public float detectionRadius = 3f; // Radius for detecting targets
+    public float raycastDistance = 3f; // Maximum distance for the raycast
 
     public Animator animator_boxing;
     public Animator animator_watermellon;
@@ -91,26 +93,35 @@ public class FightManagement : MonoBehaviourPunCallbacks
             if (animator_plunger != null) animator_plunger.SetTrigger("hit");
 
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-            ray.origin = cam.transform.position - ray.direction * 0.2f;
+            ray.origin = cam.transform.position - ray.direction * 0.1f;
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 4f))
+            // Find all colliders within the detection radius
+            Collider[] hitColliders = Physics.OverlapSphere(cam.transform.position, detectionRadius);
+            foreach (var hitCollider in hitColliders)
             {
-                Debug.Log("Raycast hit: " + hit.collider.name);
-
-                PhotonView targetPhotonView = hit.collider.GetComponent<PhotonView>();
+                // Check if the hit collider has a PhotonView component
+                PhotonView targetPhotonView = hitCollider.GetComponent<PhotonView>();
                 if (targetPhotonView != null && !targetPhotonView.IsMine)
                 {
-                    Debug.Log("Calling TakeDamage on target");
-                    targetPhotonView.RPC("RPC_TakeDamage", RpcTarget.All, 20f);
+                    // Perform a raycast to ensure there's a clear line of sight
+                    if (Physics.Raycast(ray.origin, (hitCollider.transform.position - ray.origin).normalized, out RaycastHit hit, raycastDistance))
+                    {
+                        if (hit.collider == hitCollider)
+                        {
+                            Debug.Log("Raycast hit: " + hit.collider.name);
+                            Debug.Log("Calling TakeDamage on target");
+                            targetPhotonView.RPC("RPC_TakeDamage", RpcTarget.All, 20f);
+                        }
+                        else
+                        {
+                            Debug.Log("Line of sight blocked to " + hitCollider.name);
+                        }
+                    }
                 }
                 else
                 {
                     Debug.Log("Hit object does not have a PhotonView or is the current player");
                 }
-            }
-            else
-            {
-                Debug.Log("Raycast did not hit anything");
             }
         }
     }
