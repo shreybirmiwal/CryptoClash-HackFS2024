@@ -60,6 +60,13 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.performance.profile-analyzer": {
       "version": "1.2.2",
       "depth": 1,
@@ -134,6 +141,16 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "io.chainsafe.web3-unity": {
+      "version": "https://github.com/ChainSafe/web3.unity.git?path=/Packages/io.chainsafe.web3-unity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2",
+        "com.unity.textmeshpro": "3.0.6"
+      },
+      "hash": "9efb9f02260c913626266cbda7a8a57e3514da47"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
