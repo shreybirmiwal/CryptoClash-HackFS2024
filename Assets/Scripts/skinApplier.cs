@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
-using Thirdweb;
 using Photon.Realtime;
 using System.Text.RegularExpressions;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
