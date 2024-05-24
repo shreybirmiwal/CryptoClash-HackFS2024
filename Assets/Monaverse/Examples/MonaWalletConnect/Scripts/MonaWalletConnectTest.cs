@@ -15,7 +15,7 @@ namespace Monaverse.Examples
 
         [Header("Buttons")]
         [SerializeField] private Button _connectButton;
-        //[SerializeField] private Button _disconnectButton;
+        [SerializeField] private Button _disconnectButton;
         [SerializeField] private Button _authorizeButton;
         [SerializeField] private Button _signOutButton;
         [SerializeField] private Button _postAuthorizeButton;
@@ -24,6 +24,11 @@ namespace Monaverse.Examples
         [Space][SerializeField] private GameObject _dappButtons;
         [SerializeField] private GameObject _connectedState;
         [SerializeField] private GameObject _authorizedState;
+
+
+        public GameObject errorText;
+        public TMP_Dropdown mapDropdown;
+
 
         private enum WalletState
         {
@@ -46,6 +51,35 @@ namespace Monaverse.Examples
             MonaverseManager.Instance.SDK.AuthorizationFailed += OnAuthorizationFailed;
             MonaverseManager.Instance.SDK.ConnectionErrored += OnConnectionErrored;
             MonaverseManager.Instance.SDK.SignMessageErrored += OnSignMessageErrored;
+
+            mapDropdown.onValueChanged.AddListener(delegate { UpdateMapIssues(); });
+
+            UpdateMapIssues();
+        }
+
+        void UpdateMapIssues()
+        {
+            //if default allg
+            if (mapDropdown.value == 0)
+            {
+                errorText.SetActive(false);
+            }
+
+            //not authorized and not default
+            if (mapDropdown != 0 && !WalletState.Authorized)
+            {
+                errorText.SetActive(true);
+            }
+
+            if (mapDropdown != 0 && WalletState.Authorized)
+            {
+                //if it owns, no problem
+                if ()
+
+                //if it doesn't own, show error
+
+            }
+
         }
 
         #region SDK Event Handlers
@@ -71,8 +105,9 @@ namespace Monaverse.Examples
         private void OnAuthorized(object sender, EventArgs e)
         {
             Debug.Log("[MonaWalletConnectTest.OnAuthorized]");
-            OnGetCollectibles();
+            SetUIState(WalletState.Authorized);
 
+            OnGetCollectibles();
         }
 
         private void OnConnected(object sender, string address)
@@ -119,12 +154,12 @@ namespace Monaverse.Examples
 
             try
             {
-                // _disconnectButton.interactable = false;
+                _disconnectButton.interactable = false;
                 await MonaverseManager.Instance.SDK.Disconnect();
             }
             catch (Exception e)
             {
-                // _disconnectButton.interactable = true;
+                _disconnectButton.interactable = true;
                 Debug.LogError("[MonaWalletConnectTest] Disconnect Exception: " + e.Message);
             }
         }
@@ -238,7 +273,7 @@ namespace Monaverse.Examples
                     _connectButton.interactable = true;
                     _dappButtons.SetActive(false);
                     _connectedState.SetActive(false);
-                    //_disconnectButton.gameObject.SetActive(false);
+                    _disconnectButton.gameObject.SetActive(false);
                     _resultLabel.text = "Disconnected";
                     break;
                 case WalletState.Connecting:
@@ -251,8 +286,8 @@ namespace Monaverse.Examples
                     _resultLabel.text = "Wallet Connected!";
                     _dappButtons.SetActive(true);
                     _connectedState.SetActive(true);
-                    // _disconnectButton.interactable = true;
-                    // _disconnectButton.gameObject.SetActive(true);
+                    _disconnectButton.interactable = true;
+                    _disconnectButton.gameObject.SetActive(true);
                     break;
                 case WalletState.Authorized:
                     _dappButtons.SetActive(true);
