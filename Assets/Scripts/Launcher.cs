@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
-using Thirdweb;
 using Photon.Realtime;
 
 public class Launcher : MonoBehaviourPunCallbacks
@@ -44,14 +43,12 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 
 
-    private ThirdwebSDK sdk;
 
 
     // Start is called before the first frame update
     void Start()
     {
         //connect to thirdweb
-        sdk = ThirdwebManager.Instance.SDK;
 
         Debug.Log("Connecting to Master");
         PhotonNetwork.ConnectUsingSettings();
@@ -81,13 +78,6 @@ public class Launcher : MonoBehaviourPunCallbacks
             return;
         }
 
-        //wallet
-        var data = await sdk.Wallet.IsConnected();
-        if (data == false)
-        {
-            errorTextCreateRoom.text = "Please connect your wallet";
-            return;
-        }
         mapNum = mapDropdown.value + 1;
 
         PhotonNetwork.CreateRoom(roomNameInput.text, new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
