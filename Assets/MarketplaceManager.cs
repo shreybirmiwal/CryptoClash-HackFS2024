@@ -74,6 +74,8 @@ public class MarketplaceManager : MonoBehaviour
     public void openLootbox()
     {
         buyLootbox.SetActive(true);
+        gameObject.SetActive(false);
+
     }
 
 
