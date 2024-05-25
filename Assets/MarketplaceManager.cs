@@ -15,6 +15,9 @@ public class MarketplaceManager : MonoBehaviour
     public GameObject itemTemplate;
     public Transform contentTransform;
 
+
+    public GameObject buyLootbox;
+
     void Start()
     {
         Debug.Log("Marketplace opened");
@@ -67,6 +70,11 @@ public class MarketplaceManager : MonoBehaviour
         return ethString;
     }
 
+
+    public void openLootbox()
+    {
+        buyLootbox.SetActive(true);
+    }
 
 
     IEnumerator LoadImage(string imageUrl, Image itemImage)

@@ -23,6 +23,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public GameObject joinedMenu;
     public GameObject findGameMenu;
     public GameObject marketplaceMenu;
+    public GameObject lootboxMenu;
 
     public TMP_InputField roomNameInput;
     public TMP_Dropdown mapDropdown;
@@ -168,6 +169,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         joinedMenu.SetActive(menuToShow == joinedMenu);
         findGameMenu.SetActive(menuToShow == findGameMenu);
         marketplaceMenu.SetActive(menuToShow == marketplaceMenu);
+        lootboxMenu.SetActive(menuToShow == lootboxMenu);
     }
 
 
@@ -175,14 +177,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
 
     }
-
-
-
-
-
-
-
-
 
 
 
