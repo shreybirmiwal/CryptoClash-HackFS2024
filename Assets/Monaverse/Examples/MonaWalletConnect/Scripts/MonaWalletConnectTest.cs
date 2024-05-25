@@ -28,6 +28,8 @@ namespace Monaverse.Examples
 
         public GameObject errorText;
         public TMP_Dropdown mapDropdown;
+        public Button submitButton;
+        bool isAUTHORIZED = false;
 
 
         private enum WalletState
@@ -57,30 +59,74 @@ namespace Monaverse.Examples
             UpdateMapIssues();
         }
 
-        void UpdateMapIssues()
+        async void UpdateMapIssues()
         {
+
+            Debug.Log("Map Dropdown Value: " + mapDropdown.value + " | " + isAUTHORIZED);
+
             //if default allg
             if (mapDropdown.value == 0)
             {
                 errorText.SetActive(false);
+                submitButton.interactable = true;
             }
+
+
 
             //not authorized and not default
-            if (mapDropdown != 0 && !WalletState.Authorized)
+            if (mapDropdown.value != 0 && !isAUTHORIZED)
             {
                 errorText.SetActive(true);
+                submitButton.interactable = false;
             }
 
-            if (mapDropdown != 0 && WalletState.Authorized)
+
+            if (mapDropdown.value != 0 && isAUTHORIZED)
             {
-                //if it owns, no problem
-                if ()
 
+                //_resultLabel.text = "Getting wallet collectibles...";
+
+                bool ownsNFT = false;
+
+                var getCollectiblesResult = await MonaApi.ApiClient.Collectibles.GetWalletCollectibles();
+                Debug.Log("[MonaWalletConnectTest] Collectibles: " + getCollectiblesResult);
+
+                if (getCollectiblesResult.IsSuccess && getCollectiblesResult.Data != null)
+                {
+                    var collectibles = getCollectiblesResult.Data.Data; // This is the list of CollectibleDto
+                    foreach (var collectible in collectibles)
+                    {
+                        if (collectible.Title == mapDropdown.options[mapDropdown.value].text)
+                        {
+                            ownsNFT = true;
+                        }
+                        Debug.Log("Collectible Title: " + collectible.Title);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Failed to fetch collectibles or no data available.");
+                }
+
+
+
+                //if it owns, no problem
                 //if it doesn't own, show error
+                if (ownsNFT)
+                {
+                    errorText.SetActive(false);
+                    submitButton.interactable = true;
+                }
+                else
+                {
+                    errorText.SetActive(true);
+                    submitButton.interactable = false;
+                }
 
             }
-
         }
+
+
 
         #region SDK Event Handlers
 
@@ -104,6 +150,7 @@ namespace Monaverse.Examples
 
         private void OnAuthorized(object sender, EventArgs e)
         {
+            isAUTHORIZED = true;
             Debug.Log("[MonaWalletConnectTest.OnAuthorized]");
             SetUIState(WalletState.Authorized);
 
@@ -118,6 +165,8 @@ namespace Monaverse.Examples
 
         private void OnDisconnected(object sender, EventArgs e)
         {
+            isAUTHORIZED = false;
+            UpdateMapIssues();
             Debug.Log("[MonaWalletConnectTest.OnDisconnected]");
             SetUIState(WalletState.Disconnected);
         }
@@ -150,6 +199,8 @@ namespace Monaverse.Examples
         /// </summary>
         public async void OnDisconnectButton()
         {
+            isAUTHORIZED = false;
+            UpdateMapIssues();
             Debug.Log("[MonaWalletConnectTest] OnDisconnectButton");
 
             try
@@ -208,6 +259,8 @@ namespace Monaverse.Examples
         /// </summary>
         public void OnSignOut()
         {
+            isAUTHORIZED = false;
+            UpdateMapIssues();
             try
             {
                 Debug.Log("[MonaWalletConnectTest] OnSignOut");
@@ -251,7 +304,7 @@ namespace Monaverse.Examples
                 return;
             }
 
-            _resultLabel.text = "Success: wallet collectible count: " + getCollectiblesResult.Data.TotalCount;
+            _//resultLabel.text = "Success: wallet collectible count: " + getCollectiblesResult.Data.TotalCount;
         }
 
         #endregion
