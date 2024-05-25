@@ -304,7 +304,7 @@ namespace Monaverse.Examples
                 return;
             }
 
-            _//resultLabel.text = "Success: wallet collectible count: " + getCollectiblesResult.Data.TotalCount;
+            //resultLabel.text = "Success: wallet collectible count: " + getCollectiblesResult.Data.TotalCount;
         }
 
         #endregion
