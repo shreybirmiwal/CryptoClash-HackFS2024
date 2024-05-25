@@ -10,6 +10,7 @@ public class MarketplaceManager : MonoBehaviour
 {
     public string projectID;
     public string marketplaceID;
+    public long priceMultiplier;
     private string apiURL = "https://api.gaming.chainsafe.io/v1/projects/";
     public GameObject itemTemplate;
     public Transform contentTransform;
@@ -50,11 +51,23 @@ public class MarketplaceManager : MonoBehaviour
             Button purchaseBtn = itemGO.transform.Find("PurchaseButton").GetComponent<Button>();
 
             nameText.text = item.token.metadata["name"].ToString();
-            priceText.text = item.price;
+            priceText.text = convertToEth(item.price);
             StartCoroutine(LoadImage(item.token.metadata["image"].ToString(), itemImage));
             purchaseBtn.onClick.AddListener(() => PurchaseItem(item.id));
         }
     }
+
+
+    string convertToEth(string value)
+    {
+        value = value.Substring(0, value.Length - 13);
+        long intValue = long.Parse(value);
+        float ethValue = (float)intValue / (float)100000;
+        string ethString = ethValue.ToString("F4") + " eth";
+        return ethString;
+    }
+
+
 
     IEnumerator LoadImage(string imageUrl, Image itemImage)
     {
@@ -75,7 +88,6 @@ public class MarketplaceManager : MonoBehaviour
     void PurchaseItem(string itemID)
     {
         Debug.Log("Purchasing item: " + itemID);
-        // Implement purchase logic here
     }
 
     [System.Serializable]
