@@ -22,6 +22,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public GameObject inventoryMenu;
     public GameObject joinedMenu;
     public GameObject findGameMenu;
+    public GameObject marketplaceMenu;
 
     public TMP_InputField roomNameInput;
     public TMP_Dropdown mapDropdown;
@@ -166,6 +167,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         inventoryMenu.SetActive(menuToShow == inventoryMenu);
         joinedMenu.SetActive(menuToShow == joinedMenu);
         findGameMenu.SetActive(menuToShow == findGameMenu);
+        marketplaceMenu.SetActive(menuToShow == marketplaceMenu);
     }
 
 
@@ -209,5 +211,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         ShowMenu(findGameMenu);
     }
 
-
+    public void ClickOpenMarketplace()
+    {
+        ShowMenu(marketplaceMenu);
+    }
 }
