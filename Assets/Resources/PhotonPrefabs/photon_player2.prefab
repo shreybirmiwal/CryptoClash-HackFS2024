@@ -28756,6 +28756,8 @@ MonoBehaviour:
   healthBar: {fileID: 5080011438626618754}
   photonView: {fileID: 8789816932248977739}
   cam: {fileID: 5195960252413163486}
+  detectionRadius: 3
+  raycastDistance: 3
   animator_boxing: {fileID: 7858398375041643910}
   animator_watermellon: {fileID: 4173371508431054938}
   animator_moonsword: {fileID: 453646279900168709}

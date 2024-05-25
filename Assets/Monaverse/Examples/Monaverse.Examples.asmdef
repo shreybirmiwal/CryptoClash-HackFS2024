@@ -1,0 +1,8 @@
+{
+	"name": "Monaverse.Examples",
+	"references": [
+		"Unity.TextMeshPro",
+		"Monaverse.Api",
+		"Monaverse.Core"
+	]
+}
