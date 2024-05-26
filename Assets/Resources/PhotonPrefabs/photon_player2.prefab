@@ -21026,6 +21026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5955687166983480888}
   - component: {fileID: 8954560176351230599}
+  - component: {fileID: 9078851306691477113}
   m_Layer: 0
   m_Name: camsZone
   m_TagString: Untagged
@@ -21065,6 +21066,32 @@ MonoBehaviour:
   character: {fileID: 4825887964136756623}
   sensitivity: 2
   smoothing: 1.5
+--- !u!114 &9078851306691477113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614690155352497488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 8438106369069718374}
+  - {fileID: 8080288756105785748}
+  - {fileID: 1492492582775039158}
+  - {fileID: 1634000997869395367}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &5629699667024981019
 GameObject:
   m_ObjectHideFlags: 0
@@ -22684,7 +22711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceThreshold: 0.15
-  isGrounded: 1
+  isGrounded: 0
 --- !u!1 &6146461837747306984
 GameObject:
   m_ObjectHideFlags: 0
@@ -28682,9 +28709,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 6107725293805529417}
-  - {fileID: 8438106369069718374}
-  - {fileID: 8080288756105785748}
-  - {fileID: 1634000997869395367}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
