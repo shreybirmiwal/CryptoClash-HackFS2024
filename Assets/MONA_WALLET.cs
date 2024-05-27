@@ -354,17 +354,17 @@ public class MONA_WALLET : MonoBehaviour
                 var collectibles = getCollectiblesResult.Data.Data; // This is the list of CollectibleDto
                 foreach (var collectible in collectibles)
                 {
-                    if (collectible.Type == "Space")
-                    {
-                        Debug.Log("Collectible: " + collectible);
-                        Debug.Log("URL" + collectible.Versions[collectible.ActiveVersion].Asset);
+                    // if (collectible.Type == "Space")
+                    // {
+                    Debug.Log("Collectible: " + collectible);
+                    Debug.Log("URL" + collectible.Versions[collectible.ActiveVersion].Asset);
 
 
-                        mapNames.Add(collectible.Title);
-                        //mapUrls.Add(collectible.Versions[collectible.ActiveVersion].Asset);
-                        mapUrls.Add()
+                    mapNames.Add(collectible.Title);
+                    mapUrls.Add(collectible.Versions[collectible.ActiveVersion].Asset);
+                    //mapUrls.Add("https://cdn-staging.mona.gallery/sdfe5433-suet-d9ik-rrgl-fsdfrww.vrm");
 
-                    }
+                    // }
                 }
             }
 

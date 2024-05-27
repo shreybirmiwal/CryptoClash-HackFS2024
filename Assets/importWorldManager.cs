@@ -6,7 +6,7 @@ using TMPro;
 public class importWorldManager : MonoBehaviour
 {
 
-    public TMP_InputField roomNameInput;
+    public TMP_InputField roomIINPUTFIELD;
     public TMP_Dropdown mapDropdown;
 
     private List<string> mapNames = new List<string>();
@@ -49,7 +49,8 @@ public class importWorldManager : MonoBehaviour
     public void submitNewMap()
     {
         Debug.Log("Submit New Map");
-        Debug.Log("Map Name: " + roomNameInput.text);
+
+        Debug.Log("Map Name: " + roomIINPUTFIELD.text);
         Debug.Log("Map Path: " + mapPaths[mapDropdown.value]);
 
         var loader = GetComponent<GlbLoader>();
