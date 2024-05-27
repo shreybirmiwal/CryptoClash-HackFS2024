@@ -52,14 +52,14 @@ public class importWorldManager : MonoBehaviour
         Debug.Log("Map Name: " + roomNameInput.text);
         Debug.Log("Map Path: " + mapPaths[mapDropdown.value]);
 
-        var loader = gameObject.GetComponent<GLB_Loader>();
+        var loader = GetComponent<GlbLoader>();
         loader.Load(mapPaths[mapDropdown.value], true, (GameObject obj) =>
         {
             obj.transform.position = new Vector3(0, 0, 0);
             obj.transform.localScale = new Vector3(1, 1, 1);
             obj.transform.rotation = Quaternion.Euler(0, 0, 0);
             Debug.Log("Loaded Map");
-        })
+        });
 
 
     }
