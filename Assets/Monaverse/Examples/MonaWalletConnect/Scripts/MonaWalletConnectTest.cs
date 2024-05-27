@@ -325,10 +325,15 @@ namespace Monaverse.Examples
                 case WalletState.Disconnected:
                     _connectButtonLabel.text = "Connect";
                     _connectButton.interactable = true;
+
+                    _authorizeButton.interactable = true;
+
                     _dappButtons.SetActive(false);
                     _connectedState.SetActive(false);
                     _disconnectButton.gameObject.SetActive(false);
                     _resultLabel.text = "Disconnected";
+
+
                     break;
                 case WalletState.Connecting:
                     _connectButtonLabel.text = "Connecting...";

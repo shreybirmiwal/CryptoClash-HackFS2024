@@ -97,6 +97,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.RemovedFromList = true;
         PhotonNetwork.LoadLevel(mapNum);
     }
 
@@ -145,17 +146,17 @@ public class Launcher : MonoBehaviourPunCallbacks
         foreach (RoomInfo roomInfo in roomList)
         {
 
+            Debug.Log(roomInfo.IsOpen + " **");
+
             if (roomInfo.RemovedFromList)
             {
                 continue;
             }
-            if (roomInfo.isOpen == false || roomInfo.PlayerCount == roomInfo.MaxPlayers)
+            if (roomInfo.IsOpen == false)
             {
                 continue;
             }
 
-
-            Debug.Log()
 
             GameObject newRoomItem = Instantiate(roomListItemPrefab, roomListContent);
             newRoomItem.GetComponent<roomListitem>().SetRoomInfo(roomInfo);
