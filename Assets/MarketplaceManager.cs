@@ -10,6 +10,7 @@ public class MarketplaceManager : MonoBehaviour
 {
     public string projectID;
     public string marketplaceID;
+    public string marketplaceContractAddress;
     public long priceMultiplier;
     private string apiURL = "https://api.gaming.chainsafe.io/v1/projects/";
     public GameObject itemTemplate;
@@ -48,6 +49,7 @@ public class MarketplaceManager : MonoBehaviour
         foreach (var item in items)
         {
             GameObject itemGO = Instantiate(itemTemplate, contentTransform);
+            itemGO.gameObject.GetComponent<BuyItemMarket>().setData(item.price, marketplaceContractAddress, int.Parse(item.id));
             TMP_Text nameText = itemGO.transform.Find("ItemName").GetComponent<TMP_Text>();
             TMP_Text priceText = itemGO.transform.Find("ItemPrice").GetComponent<TMP_Text>();
             Image itemImage = itemGO.transform.Find("ItemImage").GetComponent<Image>();
