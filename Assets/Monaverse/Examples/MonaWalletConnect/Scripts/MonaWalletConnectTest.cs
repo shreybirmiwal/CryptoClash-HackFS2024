@@ -155,6 +155,7 @@ namespace Monaverse.Examples
             SetUIState(WalletState.Authorized);
 
             OnGetCollectibles();
+            UpdateMapIssues();
         }
 
         private void OnConnected(object sender, string address)

@@ -82,7 +82,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         mapNum = mapDropdown.value + 1;
 
-        PhotonNetwork.CreateRoom(roomNameInput.text, new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
+        PhotonNetwork.CreateRoom(roomNameInput.text, new Photon.Realtime.RoomOptions { MaxPlayers = 5 });
 
         ShowMenu(loadingMenu);
     }
@@ -96,6 +96,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
+        PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.LoadLevel(mapNum);
     }
 
@@ -148,6 +149,13 @@ public class Launcher : MonoBehaviourPunCallbacks
             {
                 continue;
             }
+            if (roomInfo.isOpen == false || roomInfo.PlayerCount == roomInfo.MaxPlayers)
+            {
+                continue;
+            }
+
+
+            Debug.Log()
 
             GameObject newRoomItem = Instantiate(roomListItemPrefab, roomListContent);
             newRoomItem.GetComponent<roomListitem>().SetRoomInfo(roomInfo);
