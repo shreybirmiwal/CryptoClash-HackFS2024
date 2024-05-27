@@ -347,7 +347,9 @@ namespace Monaverse.Examples
                 //get all avaiable user maps
                 var getCollectiblesResult = await MonaApi.ApiClient.Collectibles.GetWalletCollectibles();
                 Debug.Log("[MonaWalletConnectTest] Collectibles: " + getCollectiblesResult);
+
                 List<string> mapNames = new List<string>();
+                List<string> mapUrls = new List<string>();
 
                 if (getCollectiblesResult.IsSuccess && getCollectiblesResult.Data != null)
                 {
@@ -357,6 +359,7 @@ namespace Monaverse.Examples
                         if (collectible.Type == "Space")
                         {
                             Debug.Log("Collectible: " + collectible);
+                            Debug.Log("URL" + collectible.Versions[collectible.ActiveVersion].Asset);
                             mapNames.Add(collectible.Title);
 
                         }
@@ -365,7 +368,7 @@ namespace Monaverse.Examples
 
 
                 importWorldUI.SetActive(true);
-                importWorldUI.gameObject.GetComponent<importWorldManager>().updateDropdown(mapNames);
+                importWorldUI.gameObject.GetComponent<importWorldManager>().updateDropdown(mapNames, mapUrls);
             }
             else
                 errorText.SetActive(true);
