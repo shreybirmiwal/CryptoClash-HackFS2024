@@ -354,6 +354,8 @@ public class MONA_WALLET : MonoBehaviour
                 var collectibles = getCollectiblesResult.Data.Data; // This is the list of CollectibleDto
                 foreach (var collectible in collectibles)
                 {
+
+                    if (collectible.Title == "CemeteryClash" || collectible.Title == "SpaceSkirmish" || collectible.Title == "TempleTussle" || collectible.Title == "ShipScuttle" || collectible.Title == "BazaarBash") continue;
                     // if (collectible.Type == "Space")
                     // {
                     Debug.Log("Collectible: " + collectible);

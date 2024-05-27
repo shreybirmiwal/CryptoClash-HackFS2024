@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
@@ -71,6 +72,31 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
     }
 
+    public void startMonaGame(string roomName, string gblURLMONA)
+    {
+
+        if (string.IsNullOrEmpty(roomName))
+        {
+            errorTextCreateRoom.text = "Room Name cannot be empty";
+            return;
+        }
+
+        mapNum = 7;
+
+
+        Hashtable customProps = new Hashtable() { { "GBLURL", gblURLMONA } };
+        RoomOptions roomOptions = new RoomOptions
+        {
+            MaxPlayers = 5,
+            CustomRoomProperties = customProps,
+            CustomRoomPropertiesForLobby = new string[] { "GBLURL" }
+        };
+
+        PhotonNetwork.CreateRoom(roomName, roomOptions);
+
+        ShowMenu(loadingMenu);
+
+    }
 
     public async void CreateRoom()
     {
@@ -93,6 +119,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         ShowMenu(loadingMenu);
 
     }
+
+
 
     public void StartGame()
     {

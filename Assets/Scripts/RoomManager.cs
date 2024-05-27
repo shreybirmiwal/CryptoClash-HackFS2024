@@ -36,7 +36,22 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if (scene.buildIndex != 0) // We're in the game scene
         {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+
+            if (scene.buildIndex == 7)
+            {
+                //we in a mona inport world
+
+                //load the world
+                string customProperties = PhotonNetwork.CurrentRoom.CustomProperties.ToString();
+                Debug.Log("Custom Game Photon Properties: " + customProperties);
+
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+            }
+            else
+            {
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+
+            }
         }
     }
 }
