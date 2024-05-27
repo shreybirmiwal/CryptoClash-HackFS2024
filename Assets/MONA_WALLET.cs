@@ -4,6 +4,8 @@ using Monaverse.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Monaverse.Examples
 {
@@ -345,19 +347,25 @@ namespace Monaverse.Examples
                 //get all avaiable user maps
                 var getCollectiblesResult = await MonaApi.ApiClient.Collectibles.GetWalletCollectibles();
                 Debug.Log("[MonaWalletConnectTest] Collectibles: " + getCollectiblesResult);
+                List<string> mapNames = new List<string>();
 
                 if (getCollectiblesResult.IsSuccess && getCollectiblesResult.Data != null)
                 {
                     var collectibles = getCollectiblesResult.Data.Data; // This is the list of CollectibleDto
                     foreach (var collectible in collectibles)
                     {
-                        Debug.Log("Collectible: " + collectible);
+                        if (collectible.Type == "Space")
+                        {
+                            Debug.Log("Collectible: " + collectible);
+                            mapNames.Add(collectible.Title);
+
+                        }
                     }
                 }
 
 
                 importWorldUI.SetActive(true);
-                // importWorldUI.gameObject.GetComponent<importWorldManager>().updateDropdown(MonaverseManager.Instance.SDK.GetMapNames());
+                importWorldUI.gameObject.GetComponent<importWorldManager>().updateDropdown(mapNames);
             }
             else
                 errorText.SetActive(true);
