@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Monaverse.Examples
 {
-    public class MonaWalletConnectTest : MonoBehaviour
+    public class MONA_WALLET : MonoBehaviour
     {
         [Header("Labels")]
         [SerializeField] private TMP_Text _connectButtonLabel;
