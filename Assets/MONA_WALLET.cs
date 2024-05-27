@@ -337,10 +337,28 @@ namespace Monaverse.Examples
 
 
 
-        public void importMonaWorldButtonClicked()
+        public async void importMonaWorldButtonClicked()
         {
             if (isAUTHORIZED)
+            {
+
+                //get all avaiable user maps
+                var getCollectiblesResult = await MonaApi.ApiClient.Collectibles.GetWalletCollectibles();
+                Debug.Log("[MonaWalletConnectTest] Collectibles: " + getCollectiblesResult);
+
+                if (getCollectiblesResult.IsSuccess && getCollectiblesResult.Data != null)
+                {
+                    var collectibles = getCollectiblesResult.Data.Data; // This is the list of CollectibleDto
+                    foreach (var collectible in collectibles)
+                    {
+                        Debug.Log("Collectible: " + collectible);
+                    }
+                }
+
+
                 importWorldUI.SetActive(true);
+                // importWorldUI.gameObject.GetComponent<importWorldManager>().updateDropdown(MonaverseManager.Instance.SDK.GetMapNames());
+            }
             else
                 errorText.SetActive(true);
         }
