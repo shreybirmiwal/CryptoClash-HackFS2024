@@ -32,6 +32,9 @@ namespace Monaverse.Examples
         bool isAUTHORIZED = false;
 
 
+        public GameObject importWorldUI;
+
+
         private enum WalletState
         {
             Disconnected,
@@ -154,7 +157,6 @@ namespace Monaverse.Examples
             Debug.Log("[MonaWalletConnectTest.OnAuthorized]");
             SetUIState(WalletState.Authorized);
 
-            OnGetCollectibles();
             UpdateMapIssues();
         }
 
@@ -283,30 +285,6 @@ namespace Monaverse.Examples
             }
         }
 
-        /// <summary>
-        /// Handles the GetCollectibles button click event to get authorized wallet collectibles.
-        /// The wallet must be authorized first.
-        /// </summary>
-        public async void OnGetCollectibles()
-        {
-            if (!MonaverseManager.Instance.SDK.IsWalletAuthorized())
-            {
-                _resultLabel.text = "Wallet must be authorized first!";
-                return;
-            }
-
-            _resultLabel.text = "Getting wallet collectibles...";
-
-            var getCollectiblesResult = await MonaApi.ApiClient.Collectibles.GetWalletCollectibles();
-            Debug.Log("[MonaWalletConnectTest] Collectibles: " + getCollectiblesResult);
-            if (!getCollectiblesResult.IsSuccess)
-            {
-                _resultLabel.text = "Error: GetCollectibles failed: " + getCollectiblesResult.Message;
-                return;
-            }
-
-            //resultLabel.text = "Success: wallet collectible count: " + getCollectiblesResult.Data.TotalCount;
-        }
 
         #endregion
 
@@ -354,6 +332,17 @@ namespace Monaverse.Examples
                     _resultLabel.text = "Wallet Authorized!";
                     break;
             }
+        }
+
+
+
+
+        public void importMonaWorldButtonClicked()
+        {
+            if (isAUTHORIZED)
+                importWorldUI.SetActive(true);
+            else
+                errorText.SetActive(true);
         }
     }
 }

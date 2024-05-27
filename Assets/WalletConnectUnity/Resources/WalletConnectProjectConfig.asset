@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: WalletConnectUnity.Core:WalletConnectUnity.Core:ProjectConfiguration
   <Id>k__BackingField: 6b35c2e9677ec328f020ce5bcf8e57b3
   <Metadata>k__BackingField:
-    Name: test
-    Description: test
-    Url: 1
+    Name: CryptoClash
+    Description: FPS Crypto fighting
+    Url: 
     Icons: []
     Redirect:
       Native: 
