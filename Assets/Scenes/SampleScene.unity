@@ -2714,7 +2714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectID: 29124038-ed93-43d9-8e9f-0cb39603cd73
   marketplaceID: 0e014a1b-1024-4027-a253-0138e863480e
-  marketplaceContractAddress: 
+  marketplaceContractAddress: 0x144fd9f1a0bda51d617bfb337992129c6166bb5b
   priceMultiplier: 1000000000000000000
   itemTemplate: {fileID: 5012629656910390572, guid: 5dc6159525e54d5489ae3ca2f4886241, type: 3}
   contentTransform: {fileID: 1077635153}
