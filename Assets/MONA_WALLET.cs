@@ -64,6 +64,7 @@ public class MONA_WALLET : MonoBehaviour
 
     async void UpdateMapIssues()
     {
+        return;
 
         Debug.Log("Map Dropdown Value: " + mapDropdown.value + " | " + isAUTHORIZED);
 
