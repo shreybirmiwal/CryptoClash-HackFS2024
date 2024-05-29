@@ -1696,10 +1696,10 @@ MonoBehaviour:
   - {fileID: 2800000, guid: be9f61f0d30bbcf4589a19448b28110e, type: 3}
   - {fileID: 2800000, guid: 3d7fa87a658c63d41b100d6e378ad358, type: 3}
   weaponsTexture:
-  - {fileID: 2800000, guid: f6788850c81153d4393dab9b717c3354, type: 3}
-  - {fileID: 2800000, guid: ab0cd5992dbf1124bb0b137055654a29, type: 3}
-  - {fileID: 2800000, guid: 009428a55d1b5f948a27f96243e41431, type: 3}
   - {fileID: 2800000, guid: 6e25969f3c5b54e4fb8ce2daf0c3768b, type: 3}
+  - {fileID: 2800000, guid: ab0cd5992dbf1124bb0b137055654a29, type: 3}
+  - {fileID: 2800000, guid: f6788850c81153d4393dab9b717c3354, type: 3}
+  - {fileID: 2800000, guid: 009428a55d1b5f948a27f96243e41431, type: 3}
 --- !u!1 &185165898
 GameObject:
   m_ObjectHideFlags: 0
@@ -3547,7 +3547,6 @@ GameObject:
   m_Component:
   - component: {fileID: 427829920}
   - component: {fileID: 427829921}
-  - component: {fileID: 427829922}
   m_Layer: 5
   m_Name: ADD_MY_WORLD
   m_TagString: Untagged
@@ -3594,18 +3593,6 @@ MonoBehaviour:
   roomIINPUTFIELD: {fileID: 95551210}
   mapDropdown: {fileID: 1331966553}
   launcherScript: {fileID: 921439146}
---- !u!114 &427829922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427829919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d20e33ce6499704f9166ddfbc951cc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &428116692
 GameObject:
   m_ObjectHideFlags: 0
@@ -4956,6 +4943,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2113150259}
     m_Modifications:
+    - target: {fileID: 1824826482449299138, guid: 057b79a6bc70e4dcdbca1c90102b2de9, type: 3}
+      propertyPath: walletConnectProjectId
+      value: bc8bf84289dc5c043967c3d28aa049cb
+      objectReference: {fileID: 0}
     - target: {fileID: 2775405142357048175, guid: 057b79a6bc70e4dcdbca1c90102b2de9, type: 3}
       propertyPath: m_Name
       value: MonaverseManager

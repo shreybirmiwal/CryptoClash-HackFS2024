@@ -45,6 +45,24 @@ public class RoomManager : MonoBehaviourPunCallbacks
                 string customProperties = PhotonNetwork.CurrentRoom.CustomProperties.ToString();
                 Debug.Log("Custom Game Photon Properties: " + customProperties);
 
+                string gblUrl = PhotonNetwork.CurrentRoom.CustomProperties["GBLURL"].ToString();
+                Debug.Log("GBLURL: " + gblUrl);
+
+
+                GameObject glbLoader = GameObject.Find("glbLoader");
+                var loader = glbLoader.gameObject.GetComponent<GlbLoader>();
+
+                loader.Load(gblUrl, true, (GameObject obj) =>
+                {
+                    obj.transform.position = new Vector3(0, 0, 0);
+                    obj.transform.localScale = new Vector3(1, 1, 1);
+                    obj.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    Debug.Log("Loaded Map");
+                });
+
+
+
+
                 PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
             }
             else

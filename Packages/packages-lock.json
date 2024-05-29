@@ -296,6 +296,16 @@
       },
       "url": "https://package.openupm.com"
     },
+    "io.chainsafe.web3-unity": {
+      "version": "https://github.com/ChainSafe/web3.unity.git?path=/Packages/io.chainsafe.web3-unity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2",
+        "com.unity.textmeshpro": "3.0.6"
+      },
+      "hash": "6343be9f1fce65eb9b8d75394e58883b68e03d33"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
