@@ -34,29 +34,28 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        if (scene.buildIndex != 0)
+
+        if (scene.buildIndex == 7)
         {
-            if (scene.buildIndex == 7)
-            {
 
-                string customProperties = PhotonNetwork.CurrentRoom.CustomProperties.ToString();
-                Debug.Log("Custom Game Photon Properties: " + customProperties);
+            string customProperties = PhotonNetwork.CurrentRoom.CustomProperties.ToString();
+            Debug.Log("Custom Game Photon Properties: " + customProperties);
 
-                string gblUrl = PhotonNetwork.CurrentRoom.CustomProperties["GBLURL"].ToString();
-                Debug.Log("GBLURL: " + gblUrl);
+            string gblUrl = PhotonNetwork.CurrentRoom.CustomProperties["GBLURL"].ToString();
+            Debug.Log("GBLURL: " + gblUrl);
 
-                GameObject spaceloader = GameObject.Find("SpaceLoader");
-                var loader = spaceloader.gameObject.GetComponent<SpaceLoader>();
-                loader.LoadSpace(gblUrl, "Space", true, new Vector3(0, 0, 0), new Vector3(0, 0, 0));
+            GameObject spaceloader = GameObject.Find("SpaceLoader");
+            var loader = spaceloader.gameObject.GetComponent<SpaceLoader>();
+            loader.LoadSpace(gblUrl, "Space", true, new Vector3(0, 0, 0), new Vector3(0, 0, 0));
 
-                // Start a coroutine to wait for the SpawnPoint and instantiate the player
-                StartCoroutine(WaitForSpawnPointAndInstantiate());
-            }
-            else
-            {
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
-            }
+            // Start a coroutine to wait for the SpawnPoint and instantiate the player
+            StartCoroutine(WaitForSpawnPointAndInstantiate());
         }
+        else if (scene.buildIndex >= 0 && scene.buildIndex <= 6) //0-6
+        {
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+        }
+
     }
 
     private IEnumerator WaitForSpawnPointAndInstantiate()
@@ -69,7 +68,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
             spawn = GameObject.Find("SpawnPoint");
             if (spawn != null)
             {
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), spawn.transform.position, spawn.transform.rotation);
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+                Debug.Log("INSTANTIATE 1");
                 loaded = true;
             }
             else
