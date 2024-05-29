@@ -306,6 +306,15 @@
       },
       "hash": "6343be9f1fce65eb9b8d75394e58883b68e03d33"
     },
+    "io.chainsafe.web3-unity.lootboxes": {
+      "version": "2.5.5",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "io.chainsafe.web3-unity": "2.5.5"
+      },
+      "url": "https://package.openupm.com"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

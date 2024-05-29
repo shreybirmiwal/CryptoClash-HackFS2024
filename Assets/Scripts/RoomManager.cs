@@ -34,41 +34,47 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        if (scene.buildIndex != 0) // We're in the game scene
+        if (scene.buildIndex != 0)
         {
-
             if (scene.buildIndex == 7)
             {
-                //we in a mona inport world
 
-                //load the world
                 string customProperties = PhotonNetwork.CurrentRoom.CustomProperties.ToString();
                 Debug.Log("Custom Game Photon Properties: " + customProperties);
 
                 string gblUrl = PhotonNetwork.CurrentRoom.CustomProperties["GBLURL"].ToString();
                 Debug.Log("GBLURL: " + gblUrl);
 
+                GameObject spaceloader = GameObject.Find("SpaceLoader");
+                var loader = spaceloader.gameObject.GetComponent<SpaceLoader>();
+                loader.LoadSpace(gblUrl, "Space", true, new Vector3(0, 0, 0), new Vector3(0, 0, 0));
 
-                GameObject glbLoader = GameObject.Find("glbLoader");
-                var loader = glbLoader.gameObject.GetComponent<GlbLoader>();
-
-                loader.Load(gblUrl, true, (GameObject obj) =>
-                {
-                    obj.transform.position = new Vector3(0, 0, 0);
-                    obj.transform.localScale = new Vector3(1, 1, 1);
-                    obj.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    Debug.Log("Loaded Map");
-                });
-
-
-
-
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+                // Start a coroutine to wait for the SpawnPoint and instantiate the player
+                StartCoroutine(WaitForSpawnPointAndInstantiate());
             }
             else
             {
                 PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+            }
+        }
+    }
 
+    private IEnumerator WaitForSpawnPointAndInstantiate()
+    {
+        bool loaded = false;
+        GameObject spawn = null;
+
+        while (!loaded)
+        {
+            spawn = GameObject.Find("SpawnPoint");
+            if (spawn != null)
+            {
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), spawn.transform.position, spawn.transform.rotation);
+                loaded = true;
+            }
+            else
+            {
+                yield return new WaitForSeconds(2);
             }
         }
     }

@@ -355,15 +355,17 @@ public class MONA_WALLET : MonoBehaviour
                 foreach (var collectible in collectibles)
                 {
 
-                    if (collectible.Title == "CemeteryClash" || collectible.Title == "SpaceSkirmish" || collectible.Title == "TempleTussle" || collectible.Title == "ShipScuttle" || collectible.Title == "BazaarBash") continue;
-                    // if (collectible.Type == "Space")
-                    // {
+                    //if (collectible.Title == "CemeteryClash" || collectible.Title == "SpaceSkirmish" || collectible.Title == "TempleTussle" || collectible.Title == "ShipScuttle" || collectible.Title == "BazaarBash") continue;
+
+                    if (collectible.Type != "Space") continue;
+
                     Debug.Log("Collectible: " + collectible);
-                    Debug.Log("URL" + collectible.Versions[collectible.ActiveVersion].Asset);
+                    Debug.Log("URL" + collectible.Versions[collectible.ActiveVersion].Assets.Space);
 
 
                     mapNames.Add(collectible.Title);
-                    mapUrls.Add(collectible.Versions[collectible.ActiveVersion].Asset);
+                    //mapUrls.Add(collectible.Versions[collectible.ActiveVersion].Asset);
+                    mapUrls.Add(collectible.Versions[collectible.ActiveVersion].Assets.Space);
                     //mapUrls.Add("https://cdn-staging.mona.gallery/sdfe5433-suet-d9ik-rrgl-fsdfrww.vrm");
 
                     // }
