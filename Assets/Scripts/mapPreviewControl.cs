@@ -14,6 +14,10 @@ public class mapPreviewControl : MonoBehaviour
     public RawImage mapImagePreview;
 
 
+    public Button submitButton;
+    public GameObject errorText;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,5 +35,24 @@ public class mapPreviewControl : MonoBehaviour
     void UpdateMapPreview()
     {
         mapImagePreview.texture = mapTextures[mapDropdown.value];
+
+        if (mapDropdown.value == 2 || mapDropdown.value == 4)
+        {
+            //bazaar bash or cemetary clash
+
+            mapDropdown.GetComponent<Image>().color = Color.red;
+            submitButton.interactable = false;
+            errorText.SetActive(true);
+
+            //mapdropdown color change
+            //submitbutton disabled
+            //error text displayed
+        }
+        else
+        {
+            mapDropdown.GetComponent<Image>().color = Color.white;
+            submitButton.interactable = true;
+            errorText.SetActive(false);
+        }
     }
 }

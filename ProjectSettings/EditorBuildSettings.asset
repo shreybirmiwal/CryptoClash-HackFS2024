@@ -14,13 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/2_TempleTussle.unity
     guid: 7c427ec8f79f4f44281a44d82b7a8729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/3_BazaarBash.unity
     guid: ce541030291742347b5abd3ad6ff60a6
   - enabled: 1
     path: Assets/Scenes/4_ShipScuttle.unity
     guid: 48cb40fe8bfcf3a4ab7b0a7553b94c1e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/5_CemeteryClash.unity
     guid: 211672f799b6ccc4da5c495525f65046
   - enabled: 1

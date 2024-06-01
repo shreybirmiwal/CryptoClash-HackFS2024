@@ -126,6 +126,24 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.RemovedFromList = true;
+
+        //check if webgl, than realize some maps are taken out
+
+        if (mapNum == 4)
+        {
+            mapNum = 3; // Adjust the map number for WebGL mode
+        }
+
+        else if (mapNum == 6)
+        {
+            mapNum = 4; // Adjust the map number for WebGL mode
+        }
+        else if (mapNum == 7)
+        {
+            mapNum = 5;
+        }
+
+
         PhotonNetwork.LoadLevel(mapNum);
     }
 
