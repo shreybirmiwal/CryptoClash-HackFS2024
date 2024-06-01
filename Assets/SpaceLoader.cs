@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Threading.Tasks;
@@ -23,6 +22,9 @@ public class SpaceLoader : MonoBehaviour
             await UnloadLoadedScenesAsync();
 
         await LoadScene(url, scene);
+
+        // Copy objects to main scene
+        await CopyObjectsToMainSceneAsync(scene);
     }
 
     private async Task LoadScene(string assetBundleUrl, string sceneName)
@@ -90,6 +92,8 @@ public class SpaceLoader : MonoBehaviour
 
         while (!task.isDone) await Task.Yield();
 
+        Debug.Log($"{nameof(LoadAssetBundleAsync)} - Scene {sceneName} loaded");
+
         bundle.Unload(false);
     }
 
@@ -103,14 +107,44 @@ public class SpaceLoader : MonoBehaviour
         for (var i = _loadedScenes.Count - 1; i >= 0; i--)
         {
             var scene = _loadedScenes[i];
+            Debug.Log($"{nameof(UnloadLoadedScenesAsync)} - Unloading Scene {scene.name}");
 
             var task = SceneManager.UnloadSceneAsync(scene);
 
             while (!task.isDone) await Task.Yield();
 
             _loadedScenes.RemoveAt(i);
+
+            Debug.Log($"{nameof(UnloadLoadedScenesAsync)} - Scene {scene.name} unloaded");
         }
     }
 
+    private async Task CopyObjectsToMainSceneAsync(string sceneName)
+    {
+        // Wait for the scene to be fully loaded
+        while (!_loadedScenes.Exists(scene => scene.name == sceneName))
+        {
+            await Task.Yield();
+        }
 
+        Scene sourceScene = _loadedScenes.Find(scene => scene.name == sceneName);
+        Scene mainScene = SceneManager.GetActiveScene();
+
+        Debug.Log($"{nameof(CopyObjectsToMainSceneAsync)} - Copying objects from Scene {sceneName} to Main Scene");
+
+        // Copy all root objects from the source scene to the main scene
+        foreach (GameObject rootObject in sourceScene.GetRootGameObjects())
+        {
+            SceneManager.MoveGameObjectToScene(rootObject, mainScene);
+            Debug.Log($"{nameof(CopyObjectsToMainSceneAsync)} - Moved object {rootObject.name} to Main Scene");
+        }
+
+        // Optionally unload the source scene after copying objects
+        var task = SceneManager.UnloadSceneAsync(sourceScene);
+
+        while (!task.isDone) await Task.Yield();
+
+        _loadedScenes.Remove(sourceScene);
+        Debug.Log($"{nameof(CopyObjectsToMainSceneAsync)} - Scene {sceneName} unloaded after copying objects");
+    }
 }
