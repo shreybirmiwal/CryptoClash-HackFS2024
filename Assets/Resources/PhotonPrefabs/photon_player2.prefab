@@ -26824,6 +26824,7 @@ GameObject:
   - component: {fileID: 6107725293805529417}
   - component: {fileID: 2702773581291806542}
   - component: {fileID: 7057285301564315472}
+  - component: {fileID: 4982875859916931941}
   m_Layer: 0
   m_Name: photon_player2
   m_TagString: Untagged
@@ -27029,6 +27030,20 @@ MonoBehaviour:
   animator_plunger: {fileID: 4623351206943574391}
   looseUI: {fileID: 1606377845091518727}
   winUI: {fileID: 6265984224961972354}
+--- !u!114 &4982875859916931941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7513609093283209291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a94bbbfe5c5667b45be966e94d92cb54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  photonView: {fileID: 8789816932248977739}
+  playerObject: {fileID: 7513609093283209291}
 --- !u!1 &7520996911841900225
 GameObject:
   m_ObjectHideFlags: 0

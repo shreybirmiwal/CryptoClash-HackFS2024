@@ -23,16 +23,8 @@ public class PlayerManager : MonoBehaviour
     void CreateController()
     {
 
-        GameObject spawn = GameObject.Find("SpawnPoint");
-        if (spawn != null)
-        {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "photon_player2"), spawn.transform.position, spawn.transform.rotation);
-        }
-        else
-        {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "photon_player2"), Vector3.zero, Quaternion.identity);
-        }
 
-        Debug.Log("Instantiated Player Controller");
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "photon_player2"), Vector3.zero, Quaternion.identity);
+        Debug.Log("Instantiated Player Controller PlayerManager.cs");
     }
 }

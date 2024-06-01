@@ -35,47 +35,49 @@ public class RoomManager : MonoBehaviourPunCallbacks
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
 
-        if (scene.buildIndex == 7)
-        {
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
 
-            string customProperties = PhotonNetwork.CurrentRoom.CustomProperties.ToString();
-            Debug.Log("Custom Game Photon Properties: " + customProperties);
+        // if (scene.buildIndex == 7)
+        // {
 
-            string gblUrl = PhotonNetwork.CurrentRoom.CustomProperties["GBLURL"].ToString();
-            Debug.Log("GBLURL: " + gblUrl);
+        //     string customProperties = PhotonNetwork.CurrentRoom.CustomProperties.ToString();
+        //     Debug.Log("Custom Game Photon Properties: " + customProperties);
 
-            GameObject spaceloader = GameObject.Find("SpaceLoader");
-            var loader = spaceloader.gameObject.GetComponent<SpaceLoader>();
-            loader.LoadSpace(gblUrl, "Space", true, new Vector3(0, 0, 0), new Vector3(0, 0, 0));
+        //     string gblUrl = PhotonNetwork.CurrentRoom.CustomProperties["GBLURL"].ToString();
+        //     Debug.Log("GBLURL: " + gblUrl);
 
-            // Start a coroutine to wait for the SpawnPoint and instantiate the player
-            StartCoroutine(WaitForSpawnPointAndInstantiate());
-        }
-        else if (scene.buildIndex >= 0 && scene.buildIndex <= 6) //0-6
-        {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
-        }
+        //     GameObject spaceloader = GameObject.Find("SpaceLoader");
+        //     var loader = spaceloader.gameObject.GetComponent<SpaceLoader>();
+        //     loader.LoadSpace(gblUrl, "Space", true, new Vector3(0, 0, 0), new Vector3(0, 0, 0));
+
+        //     // Start a coroutine to wait for the SpawnPoint and instantiate the player
+        //     StartCoroutine(WaitForSpawnPointAndInstantiate());
+        // }
+        // else if (scene.buildIndex >= 0 && scene.buildIndex <= 6) //0-6
+        // {
+        //     PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+        // }
 
     }
 
-    private IEnumerator WaitForSpawnPointAndInstantiate()
-    {
-        bool loaded = false;
-        GameObject spawn = null;
+    // private IEnumerator WaitForSpawnPointAndInstantiate()
+    // {
+    //     bool loaded = false;
+    //     GameObject spawn = null;
 
-        while (!loaded)
-        {
-            spawn = GameObject.Find("SpawnPoint");
-            if (spawn != null)
-            {
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
-                Debug.Log("INSTANTIATE 1");
-                loaded = true;
-            }
-            else
-            {
-                yield return new WaitForSeconds(2);
-            }
-        }
-    }
+    //     while (!loaded)
+    //     {
+    //         spawn = GameObject.Find("SpawnPoint");
+    //         if (spawn != null)
+    //         {
+    //             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+    //             Debug.Log("INSTANTIATE 1");
+    //             loaded = true;
+    //         }
+    //         else
+    //         {
+    //             yield return new WaitForSeconds(2);
+    //         }
+    //     }
+    // }
 }
