@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b105f096d21e42cfac1c5f6ae49fe4ca, type: 3}
   m_Name: WalletConnectProjectConfig
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: bc8bf84289dc5c043967c3d28aa049cb
+  <Id>k__BackingField: 6b35c2e9677ec328f020ce5bcf8e57b3
   <Metadata>k__BackingField:
-    Name: test
-    Description: test
-    Url: 
+    Name: Modal Test Scene
+    Description: Mona Wallet SDK test
+    Url: https://monaverse.com
     Icons: []
     Redirect:
       Native: 
