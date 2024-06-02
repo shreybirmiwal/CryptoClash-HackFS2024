@@ -1,4 +1,4 @@
-CryptoClash
+**CryptoClash**
 
 CryptoClash was made for the ethGlobal HackFS Hackathon from May 17 – June 7, 2024 by Shrey Birmiwal and Sree Duggirala.
 
