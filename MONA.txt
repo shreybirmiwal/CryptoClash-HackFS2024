@@ -1,0 +1,61 @@
+Relevent Code To MONA:
+
+
+MONA_WALLET.cs
+    public async void importMonaWorldButtonClicked()
+    {
+        if (isAUTHORIZED)
+        {
+
+            //get all avaiable user maps
+            var getCollectiblesResult = await MonaApi.ApiClient.Collectibles.GetWalletCollectibles();
+            Debug.Log("[MonaWalletConnectTest] Collectibles: " + getCollectiblesResult);
+
+            List<string> mapNames = new List<string>();
+            List<string> mapUrls = new List<string>();
+
+            if (getCollectiblesResult.IsSuccess && getCollectiblesResult.Data != null)
+            {
+                var collectibles = getCollectiblesResult.Data.Data; // This is the list of CollectibleDto
+                foreach (var collectible in collectibles)
+                {
+
+                    //if (collectible.Title == "CemeteryClash" || collectible.Title == "SpaceSkirmish" || collectible.Title == "TempleTussle" || collectible.Title == "ShipScuttle" || collectible.Title == "BazaarBash") continue;
+
+                    if (collectible.Type != "Space") continue;
+
+                    Debug.Log("Collectible: " + collectible);
+                    Debug.Log("URL" + collectible.Versions[collectible.ActiveVersion].Assets.Space);
+
+
+                    mapNames.Add(collectible.Title);
+                    //mapUrls.Add(collectible.Versions[collectible.ActiveVersion].Asset);
+                    mapUrls.Add(collectible.Versions[collectible.ActiveVersion].Assets.Space);
+                    //mapUrls.Add("https://cdn-staging.mona.gallery/sdfe5433-suet-d9ik-rrgl-fsdfrww.vrm");
+
+                    // }
+                }
+            }
+
+
+            importWorldUI.SetActive(true);
+            importWorldUI.gameObject.GetComponent<importWorldManager>().updateDropdown(mapNames, mapUrls);
+        }
+        else
+            errorText.SetActive(true);
+        }
+    }
+
+
+
+
+Spawning Player:
+MONA_MAP_ONPLAYER.cs
+
+Spawning map:
+SpaceLoader.cs
+
+ConnectingWAllet:
+MONA_WALLET.cs
+
+
