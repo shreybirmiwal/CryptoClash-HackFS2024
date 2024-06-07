@@ -1,4 +1,3 @@
-![1](https://github.com/shreybirmiwal/hackfs/assets/67839663/4669878b-a117-48d3-8eba-e50c13a0ea30)
 
 ![image](https://github.com/shreybirmiwal/CryptoClash-HackFS2024/assets/67839663/0bcff433-07a0-4665-8319-93de8e8a9a53)
 
