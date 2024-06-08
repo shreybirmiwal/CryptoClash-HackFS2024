@@ -22,6 +22,10 @@ namespace ChainSafe.Gaming.UnityPackage.Common
 
 
 
+        public GameObject walletConnectUI;
+
+
+
 
 
         /// <summary>
@@ -45,6 +49,8 @@ namespace ChainSafe.Gaming.UnityPackage.Common
             joinGame.interactable = true;
             inventory.interactable = true;
             marketplace.interactable = true;
+
+            walletConnectUI.SetActive(false);
 
         }
     }

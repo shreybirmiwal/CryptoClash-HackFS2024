@@ -5,14 +5,29 @@ using UnityEngine.Networking;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine;
+using Scripts.EVM.Marketplace;
+using UnityEngine;
+
 
 public class MarketplaceManager : MonoBehaviour
 {
+
+    [Header("List to marketplace calls")]
+    [SerializeField]
+    private string marketplaceContractToBuyFrom = "0x144fd9f1a0bda51d617bfb337992129c6166bb5b";
+    [SerializeField] private string weiPriceToBuy = "1000000000000000";
+
+
+
+
+
     public string projectID;
     public string marketplaceID;
     public string marketplaceContractAddress;
     public long priceMultiplier;
     private string apiURL = "https://api.gaming.chainsafe.io/v1/projects/";
+    //https://api.gaming.chainsafe.io/v1/projects/29124038-ed93-43d9-8e9f-0cb39603cd73/marketplaces/0e014a1b-1024-4027-a253-0138e863480e/items
     public GameObject itemTemplate;
     public Transform contentTransform;
 
@@ -97,10 +112,21 @@ public class MarketplaceManager : MonoBehaviour
         }
     }
 
-    void PurchaseItem(string itemID)
+    async void PurchaseItem(string itemID)
     {
         Debug.Log("Purchasing item: " + itemID);
+
+        var data = await Marketplace.PurchaseNft(marketplaceContractToBuyFrom, itemID, weiPriceToBuy);
+        var response = SampleOutputUtil.BuildOutputValue(data);
+        Debug.Log($"TX: {response}");
+
     }
+    // public async void PurchaseNftFromMarketplace()
+    // {
+    //     var data = await Marketplace.PurchaseNft(marketplaceContractToBuyFrom, tokenIdToBuy, weiPriceToBuy);
+    //     var response = SampleOutputUtil.BuildOutputValue(data);
+    //     Debug.Log($"TX: {response}");
+    // }
 
     [System.Serializable]
     public class ItemsResponse

@@ -168,6 +168,16 @@
       },
       "hash": "b2588bc6092461b3b18547418359bf00594be794"
     },
+    "io.chainsafe.web3-unity.marketplace": {
+      "version": "https://github.com/ChainSafe/web3.unity.git?path=/Packages/io.chainsafe.web3-unity.marketplace",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2",
+        "io.chainsafe.web3-unity": "2.6.0"
+      },
+      "hash": "b2588bc6092461b3b18547418359bf00594be794"
+    },
     "nuget.mono-cecil": {
       "version": "1.0.0",
       "depth": 1,
