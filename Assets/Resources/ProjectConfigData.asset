@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ProjectConfigData
   m_EditorClassIdentifier: 
   projectID: 29124038-ed93-43d9-8e9f-0cb39603cd73
-  chainID: 
-  chain: 
-  network: 
-  symbol: 
-  rpc: 
+  chainID: 11155111
+  chain: Sepolia
+  network: ETH
+  symbol: ETH
+  rpc: https://rpc.sepolia.org
