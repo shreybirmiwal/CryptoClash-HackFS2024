@@ -142,6 +142,16 @@
       },
       "url": "https://packages.unity.com"
     },
+    "io.chainsafe.web3-unity": {
+      "version": "https://github.com/ChainSafe/web3.unity.git?path=/Packages/io.chainsafe.web3-unity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2",
+        "com.unity.textmeshpro": "3.0.6"
+      },
+      "hash": "b2588bc6092461b3b18547418359bf00594be794"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
