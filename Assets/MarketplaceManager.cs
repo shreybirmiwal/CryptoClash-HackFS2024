@@ -13,10 +13,8 @@ using UnityEngine;
 public class MarketplaceManager : MonoBehaviour
 {
 
-    [Header("List to marketplace calls")]
-    [SerializeField]
     private string marketplaceContractToBuyFrom = "0x144fd9f1a0bda51d617bfb337992129c6166bb5b";
-    [SerializeField] private string weiPriceToBuy = "1000000000000000";
+    private string weiPriceToBuy = "1000000000000000";
 
 
 
