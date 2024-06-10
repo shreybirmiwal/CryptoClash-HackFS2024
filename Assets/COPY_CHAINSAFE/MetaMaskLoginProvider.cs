@@ -36,7 +36,7 @@ public class MetaMaskLoginProvider : LoginProvider, IWeb3BuilderServiceAdapter
             // Currently Metamask browser connections can only run in WebGL builds.
             // See point 5 in https://github.com/Nethereum/Unity3dSampleTemplate?tab=readme-ov-file#important-notes.
 #if UNITY_WEBGL && !UNITY_EDITOR
-            services.UseMetaMask().UseMetaMaskSigner().UseMetaMaskTransactionExecutor();
+                        services.UseMetaMask().UseMetaMaskSigner().UseMetaMaskTransactionExecutor();
 #else
             Debug.LogError("Metamask browser connection, currently, only works on WebGL Builds (not in editor).");
 #endif
