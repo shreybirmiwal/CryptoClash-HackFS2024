@@ -1,3 +1,4 @@
+using ChainSafe.Gaming.UnityPackage;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,6 @@ using UnityEngine.UI; // For RawImage components
 using Photon.Pun;
 using Photon.Realtime;
 using ChainSafe.Gaming.Evm.Contracts.BuiltIn;
-using ChainSafe.Gaming.UnityPackage;
 using Scripts.EVM.Token;
 
 public class InventorySelect : MonoBehaviour
@@ -20,12 +20,14 @@ public class InventorySelect : MonoBehaviour
     public TMP_InputField usernameInput;
 
 
+    public GameObject loader;
 
     public List<Texture> skinsTexture;
     public List<Texture> weaponsTexture;
 
 
-    private string account = Web3Accessor.Web3.Signer.PublicAddress;
+    private string account;
+
     private string WeaponcontractAddress = "0x93b9a7f44acd5827c1a438cf21785f9321bc382c";
     private string SkinsContractAddress = "0xd8ba4cd13542915a6de2402b8f61d510baae0890";
 
@@ -37,11 +39,20 @@ public class InventorySelect : MonoBehaviour
 
 
 
+    private bool ownsWeapon = true;
+    private bool ownSkin = true;
+
+
     void Start()
     {
+        loader.SetActive(false);
+
+        account = Web3Accessor.Web3.Signer.PublicAddress;
         weaponDropdown.onValueChanged.AddListener(delegate { UpdateWeaponPreview(); });
         skinDropdown.onValueChanged.AddListener(delegate { UpdateSkinPreview(); });
 
+        UpdateSkinPreview();
+        UpdateWeaponPreview();
 
         if (PhotonNetwork.NickName != "" || PhotonNetwork.NickName != null)
         {
@@ -55,16 +66,10 @@ public class InventorySelect : MonoBehaviour
             usernameInput.text = "Player " + Random.Range(0, 1000).ToString("0000");
         }
 
-        UpdateSkinPreview();
-        UpdateWeaponPreview();
+
     }
 
-    void OnEnable()
-    {
-        Debug.Log("OnEnable called");
-        UpdateSkinPreview();
-        UpdateWeaponPreview();
-    }
+
 
     private int getWeaponTokenID(int weaponIndex)
     {
@@ -99,56 +104,60 @@ public class InventorySelect : MonoBehaviour
 
     async void UpdateWeaponPreview()
     {
+        weaponImagePreview.texture = weaponsTexture[weaponDropdown.value];
+
 
         var tokenID = getWeaponTokenID(weaponDropdown.value);
         if (tokenID == -1)
         {
-            submitButton.interactable = true;
-            mustOwnItemText.SetActive(false);
+            ownsWeapon = true;
             return;
         }
 
-        var owner = await Web3Accessor.Web3.Erc721.GetOwnerOf(WeaponcontractAddress, tokenID);
+        loader.SetActive(true);
 
+        var owner = await Web3Accessor.Web3.Erc721.GetOwnerOf(WeaponcontractAddress, tokenID);
+        loader.SetActive(false);
+
+        Debug.Log("Owner of weapon: " + owner);
         if (owner == account)
         {
-            submitButton.interactable = true;
-            mustOwnItemText.SetActive(false);
+            ownsWeapon = true;
         }
         else
         {
-            submitButton.interactable = false;
-            mustOwnItemText.SetActive(true);
+            ownsWeapon = false;
         }
 
-        weaponImagePreview.texture = weaponsTexture[weaponDropdown.value];
+
     }
 
     async void UpdateSkinPreview()
     {
+        skinImagePreview.texture = skinsTexture[skinDropdown.value];
 
         var tokenID = getSkinID(skinDropdown.value);
         if (tokenID == -1)
         {
-            submitButton.interactable = true;
-            mustOwnItemText.SetActive(false);
+            ownSkin = true;
             return;
         }
 
+        loader.SetActive(true);
         var owner = await Web3Accessor.Web3.Erc721.GetOwnerOf(SkinsContractAddress, tokenID);
+        loader.SetActive(false);
+
+        Debug.Log("Owner: " + owner);
 
         if (owner == account)
         {
-            submitButton.interactable = true;
-            mustOwnItemText.SetActive(false);
+            ownSkin = true;
         }
         else
         {
-            submitButton.interactable = false;
-            mustOwnItemText.SetActive(true);
+            ownSkin = false;
         }
 
-        skinImagePreview.texture = skinsTexture[skinDropdown.value];
     }
 
 
@@ -166,5 +175,20 @@ public class InventorySelect : MonoBehaviour
 
         Debug.Log("PhotonNetwork.NickName: " + PhotonNetwork.NickName);
 
+    }
+
+
+    void Update()
+    {
+        if (ownsWeapon && ownSkin)
+        {
+            mustOwnItemText.SetActive(false);
+            submitButton.interactable = true;
+        }
+        else
+        {
+            mustOwnItemText.SetActive(true);
+            submitButton.interactable = false;
+        }
     }
 }
