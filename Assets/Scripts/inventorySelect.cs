@@ -5,6 +5,9 @@ using TMPro; // For TextMeshPro dropdowns
 using UnityEngine.UI; // For RawImage components
 using Photon.Pun;
 using Photon.Realtime;
+using ChainSafe.Gaming.Evm.Contracts.BuiltIn;
+using ChainSafe.Gaming.UnityPackage;
+using Scripts.EVM.Token;
 
 public class InventorySelect : MonoBehaviour
 {
@@ -20,6 +23,19 @@ public class InventorySelect : MonoBehaviour
 
     public List<Texture> skinsTexture;
     public List<Texture> weaponsTexture;
+
+
+    private string account = Web3Accessor.Web3.Signer.PublicAddress;
+    private string WeaponcontractAddress = "0x93b9a7f44acd5827c1a438cf21785f9321bc382c";
+    private string SkinsContractAddress = "0xd8ba4cd13542915a6de2402b8f61d510baae0890";
+
+
+    public Button submitButton;
+
+
+    public GameObject mustOwnItemText;
+
+
 
     void Start()
     {
@@ -38,6 +54,9 @@ public class InventorySelect : MonoBehaviour
         {
             usernameInput.text = "Player " + Random.Range(0, 1000).ToString("0000");
         }
+
+        UpdateSkinPreview();
+        UpdateWeaponPreview();
     }
 
     void OnEnable()
@@ -47,14 +66,88 @@ public class InventorySelect : MonoBehaviour
         UpdateWeaponPreview();
     }
 
-
-    void UpdateWeaponPreview()
+    private int getWeaponTokenID(int weaponIndex)
     {
+        if (weaponIndex == 0) return -1;
+        if (weaponIndex == 1) return 7; //watermellon wacker
+        if (weaponIndex == 2) return 1; //poopy
+        if (weaponIndex == 3) return 0; //etherual
+
+        return -2;
+    }
+
+    private int getSkinID(int skinIndex)
+    {
+        if (skinIndex == 0) return -1;
+        if (skinIndex == 1) return 2;
+        if (skinIndex == 2) return 3;
+        if (skinIndex == 3) return 11;
+        if (skinIndex == 4) return 10;
+        if (skinIndex == 5) return 5;
+        if (skinIndex == 6) return 13;
+        if (skinIndex == 7) return 6;
+        if (skinIndex == 8) return 9;
+        if (skinIndex == 9) return 14;
+        if (skinIndex == 10) return 12;
+        if (skinIndex == 11) return 4;
+
+        return -1;
+
+    }
+
+
+
+    async void UpdateWeaponPreview()
+    {
+
+        var tokenID = getWeaponTokenID(weaponDropdown.value);
+        if (tokenID == -1)
+        {
+            submitButton.interactable = true;
+            mustOwnItemText.SetActive(false);
+            return;
+        }
+
+        var owner = await Web3Accessor.Web3.Erc721.GetOwnerOf(WeaponcontractAddress, tokenID);
+
+        if (owner == account)
+        {
+            submitButton.interactable = true;
+            mustOwnItemText.SetActive(false);
+        }
+        else
+        {
+            submitButton.interactable = false;
+            mustOwnItemText.SetActive(true);
+        }
+
         weaponImagePreview.texture = weaponsTexture[weaponDropdown.value];
     }
 
-    void UpdateSkinPreview()
+    async void UpdateSkinPreview()
     {
+
+        var tokenID = getSkinID(skinDropdown.value);
+        if (tokenID == -1)
+        {
+            submitButton.interactable = true;
+            mustOwnItemText.SetActive(false);
+            return;
+        }
+
+        var owner = await Web3Accessor.Web3.Erc721.GetOwnerOf(SkinsContractAddress, tokenID);
+
+        if (owner == account)
+        {
+            submitButton.interactable = true;
+            mustOwnItemText.SetActive(false);
+        }
+        else
+        {
+            submitButton.interactable = false;
+            mustOwnItemText.SetActive(true);
+        }
+
         skinImagePreview.texture = skinsTexture[skinDropdown.value];
     }
 

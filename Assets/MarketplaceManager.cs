@@ -61,6 +61,10 @@ public class MarketplaceManager : MonoBehaviour
     {
         foreach (var item in items)
         {
+            // Debug.Log("Item: " + item.id + " " + item.status);
+            // if (item.status != "sold")
+            // {
+
             GameObject itemGO = Instantiate(itemTemplate, contentTransform);
             itemGO.gameObject.GetComponent<BuyItemMarket>().setData(item.price, marketplaceContractAddress, int.Parse(item.id));
             TMP_Text nameText = itemGO.transform.Find("ItemName").GetComponent<TMP_Text>();
@@ -72,6 +76,8 @@ public class MarketplaceManager : MonoBehaviour
             priceText.text = convertToEth(item.price);
             StartCoroutine(LoadImage(item.token.metadata["image"].ToString(), itemImage));
             purchaseBtn.onClick.AddListener(() => PurchaseItem(item.id));
+
+            // }
         }
     }
 
@@ -118,13 +124,10 @@ public class MarketplaceManager : MonoBehaviour
         var response = SampleOutputUtil.BuildOutputValue(data);
         Debug.Log($"TX: {response}");
 
+        GetMarketplaceItems();
+
     }
-    // public async void PurchaseNftFromMarketplace()
-    // {
-    //     var data = await Marketplace.PurchaseNft(marketplaceContractToBuyFrom, tokenIdToBuy, weiPriceToBuy);
-    //     var response = SampleOutputUtil.BuildOutputValue(data);
-    //     Debug.Log($"TX: {response}");
-    // }
+
 
     [System.Serializable]
     public class ItemsResponse
