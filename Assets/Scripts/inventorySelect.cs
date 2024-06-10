@@ -47,7 +47,7 @@ public class InventorySelect : MonoBehaviour
     {
         loader.SetActive(false);
 
-        account = Web3Accessor.Web3.Signer.PublicAddress;
+        account = Web3Accessor.Web3.Signer.PublicAddress.ToLower();
         weaponDropdown.onValueChanged.AddListener(delegate { UpdateWeaponPreview(); });
         skinDropdown.onValueChanged.AddListener(delegate { UpdateSkinPreview(); });
 
@@ -73,31 +73,40 @@ public class InventorySelect : MonoBehaviour
 
     private int getWeaponTokenID(int weaponIndex)
     {
+        // if (weaponIndex == 0) return -1;
+        // if (weaponIndex == 1) return 7; //watermellon wacker
+        // if (weaponIndex == 2) return 1; //poopy
+        // if (weaponIndex == 3) return 0; //etherual
+
+        // return -2;
+
         if (weaponIndex == 0) return -1;
-        if (weaponIndex == 1) return 7; //watermellon wacker
-        if (weaponIndex == 2) return 1; //poopy
-        if (weaponIndex == 3) return 0; //etherual
+        if (weaponIndex == 1) return 1;
+        if (weaponIndex == 2) return 2;
+        if (weaponIndex == 3) return 0;
 
         return -2;
+
+
     }
 
     private int getSkinID(int skinIndex)
     {
-        if (skinIndex == 0) return -1;
-        if (skinIndex == 1) return 2;
-        if (skinIndex == 2) return 3;
-        if (skinIndex == 3) return 11;
-        if (skinIndex == 4) return 10;
-        if (skinIndex == 5) return 5;
-        if (skinIndex == 6) return 13;
-        if (skinIndex == 7) return 6;
-        if (skinIndex == 8) return 9;
-        if (skinIndex == 9) return 14;
-        if (skinIndex == 10) return 12;
-        if (skinIndex == 11) return 4;
+        // if (skinIndex == 0) return -1;
+        // if (skinIndex == 1) return 2;
+        // if (skinIndex == 2) return 3;
+        // if (skinIndex == 3) return 11;
+        // if (skinIndex == 4) return 10;
+        // if (skinIndex == 5) return 5;
+        // if (skinIndex == 6) return 13;
+        // if (skinIndex == 7) return 6;
+        // if (skinIndex == 8) return 9;
+        // if (skinIndex == 9) return 14;
+        // if (skinIndex == 10) return 12;
+        // if (skinIndex == 11) return 4;
 
-        return -1;
-
+        // return -1;
+        return skinIndex - 1;
     }
 
 
@@ -117,9 +126,12 @@ public class InventorySelect : MonoBehaviour
         loader.SetActive(true);
 
         var owner = await Web3Accessor.Web3.Erc721.GetOwnerOf(WeaponcontractAddress, tokenID);
+        owner = owner.ToLower();
+
         loader.SetActive(false);
 
-        Debug.Log("Owner of weapon: " + owner);
+        //Debug.LogError("Owner of weapon: " + owner);
+        //Debug.LogError("Account: " + account);
         if (owner == account)
         {
             ownsWeapon = true;
@@ -145,9 +157,10 @@ public class InventorySelect : MonoBehaviour
 
         loader.SetActive(true);
         var owner = await Web3Accessor.Web3.Erc721.GetOwnerOf(SkinsContractAddress, tokenID);
+        owner = owner.ToLower();
         loader.SetActive(false);
 
-        Debug.Log("Owner: " + owner);
+        //        Debug.LogError("Owner: " + owner);
 
         if (owner == account)
         {
