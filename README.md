@@ -5,7 +5,7 @@
 
 CryptoClash was made for the ethGlobal HackFS Hackathon from May 17 – June 7, 2024 by Shrey Birmiwal and Sree Duggirala.
 
-It was a finalist in the hackathon and won the grand prize (5,000$) from MONA for best gaming project utilizing MONA SDK
+It was a finalist in the hackathon and won the grand prize (5,000$) from MONA for best gaming project utilizing MONA SDK. It also won 750$ from ChainSafe Gaming for marketplace integration (after hackathon ended)
 
 CryptoClash is a multiplayer first person boxing game where you can unlock skins, weapons, and fight in your MONAVERSE metaverse spaces!
 
