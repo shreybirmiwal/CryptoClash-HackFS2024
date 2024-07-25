@@ -14,7 +14,7 @@ CryptoClash utilizes the MONAVERSE Blockchain metaverse. Any 'world'/'space' NFT
 CryptoClash integrates marketplace SDK from ChainSafe to enable the buying and selling of weapons, skins, and maps as NFT tokens.
 
 ### Trailer (Click Image)
-[![Trailer](https://github.com/user-attachments/assets/ad2c2215-906a-4307-a8b8-522505600775)]([https://www.youtube.com/watch?v=PpnPVjxfugs])
+[![Trailer](https://github.com/user-attachments/assets/ad2c2215-906a-4307-a8b8-522505600775)](https://www.youtube.com/watch?v=PpnPVjxfugs)
 
 
 ### Play the game (Click Image)
